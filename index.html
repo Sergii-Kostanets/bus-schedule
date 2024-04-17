@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burkesbus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Burkesbus</h1>
+    <p id="dayOfWeek"></p>
+    <label for="daySelect">Choose the day:</label>
+    <select id="daySelect">
+        <option value="Today">Today</option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+    </select>
+    <div id="schedule">
+        <div>
+            <h2>Claregalway &rArr;&nbsp;Galway</h2>
+            <ul id="claregalwayToGalway"></ul>
+        </div>
+        <div>
+            <h2>Galway&nbsp;&rArr; Claregalway</h2>    
+            <ul id="galwayToClaregalway"></ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
