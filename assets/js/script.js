@@ -80,7 +80,8 @@ function getCurrentTime() {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes();
-  return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+  const seconds = now.getSeconds();
+  return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 }
 
 function filterSchedule(schedule) {
@@ -125,9 +126,6 @@ claregalwaySchedule.forEach(entry => {
   claregalwayList.appendChild(listItem);
 });
 
-
-
-
 function updateSchedule() {
     const daySelect = document.getElementById("daySelect");
     const selectedDay = daySelect.value;
@@ -169,9 +167,13 @@ function updateSchedule() {
         claregalwayList.appendChild(listItem);
       });
     }
-  }
+}
 
-  document.getElementById("daySelect").addEventListener("change", updateSchedule);
+document.getElementById("daySelect").addEventListener("change", updateSchedule);
+
+// Initialize schedule for today
+updateSchedule();
   
-  // Initialize schedule for today
-  updateSchedule();
+document.getElementById('refreshButton').addEventListener('click', function() {
+    location.reload();
+});

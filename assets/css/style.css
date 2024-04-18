@@ -27,3 +27,18 @@ li {
     max-width: 400px;
     margin: 0 auto;
 }
+#refreshButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+    background-color: #dadada;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+#refreshButton:hover {
+    background-color: #ff0000; /* Adjust hover background color as needed */
+}
