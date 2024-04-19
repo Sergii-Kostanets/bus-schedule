@@ -108,6 +108,16 @@ function filterSchedule(schedule) {
 }
 
 function updateSchedule() {
+    const selectedRadioButton = document.querySelector('input[name="dayOfTheWeek"]:checked');
+
+    // Remove the "checked" class from all radio button labels
+    document.querySelectorAll('.checked').forEach(label => {
+        label.classList.remove('checked');
+    });
+
+    // Add the "checked" class to the label of the currently selected radio button
+    selectedRadioButton.nextElementSibling.classList.add('checked');
+
     const selectedDay = document.querySelector('input[name="dayOfTheWeek"]:checked').value;
     
     const galwaySchedule = toGalwaySchedule(selectedDay);
