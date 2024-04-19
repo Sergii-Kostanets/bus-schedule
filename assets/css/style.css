@@ -67,7 +67,7 @@ fieldset {
     border: none;
     color: aliceblue;
     position: fixed;
-    bottom: 0;
+    bottom: 36px;
     left: 0;
     width: 100%;
 }
@@ -83,6 +83,7 @@ fieldset > div {
     padding: 6px 3px;
     background-color: rgba(0, 0, 0, 0.274);
     border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 7px;
 }
 fieldset > div > div {
     display: flex;
@@ -104,9 +105,8 @@ fieldset > div > div > label:active {
 fieldset > div > div > label.checked {
     background-color: rgba(199, 199, 199, 0.5);
 }
-@media screen and (max-height: 500px) {
+@media screen and (max-height: 600px) {
     #schedule > div > ul > li {
         font-size: 10px;
     }
-    
 }
