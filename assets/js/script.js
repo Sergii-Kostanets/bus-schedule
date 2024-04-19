@@ -2,7 +2,7 @@ var button = document.getElementById("refreshButton");
 
 setTimeout(function() {
     button.classList.remove("clicked");
-}, 1000);
+}, 5000);
 
 const toGalway = [
   { day: 'M-F', time: '07:00' },
@@ -125,25 +125,25 @@ function updateSchedule() {
   
       filteredGalwaySchedule.forEach(entry => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${entry.time}`;
+        listItem.innerHTML = `<b>${entry.time}</b>`;
         galwayList.appendChild(listItem);
       });
   
       filteredClaregalwaySchedule.forEach(entry => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${entry.time}`;
+        listItem.innerHTML = `<b>${entry.time}</b>`;
         claregalwayList.appendChild(listItem);
       });
     } else {
       galwaySchedule.forEach(entry => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${entry.time}`;
+        listItem.innerHTML = `<b>${entry.time}</b>`;
         galwayList.appendChild(listItem);
       });
   
       claregalwaySchedule.forEach(entry => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${entry.time}`;
+        listItem.innerHTML = `<b>${entry.time}</b>`;
         claregalwayList.appendChild(listItem);
       });
     }
