@@ -13,17 +13,45 @@
 <body>
     <h1>Burkesbus</h1>
     <p id="dayOfWeek"></p>
-    <label for="daySelect">Choose the day:</label>
-    <select id="daySelect">
-        <option value="Today">Today</option>
-        <option value="Monday">Monday</option>
-        <option value="Tuesday">Tuesday</option>
-        <option value="Wednesday">Wednesday</option>
-        <option value="Thursday">Thursday</option>
-        <option value="Friday">Friday</option>
-        <option value="Saturday">Saturday</option>
-        <option value="Sunday">Sunday</option>
-    </select>
+    
+    <fieldset>
+        <legend>Choose the day:</legend>
+        <div>
+            <div>
+                <input type="radio" id="Today" name="dayOfTheWeek" value="Today" checked />
+                <label for="Today">Today</label>
+            </div>
+            <div>
+                <input type="radio" id="Monday" name="dayOfTheWeek" value="Monday" />
+                <label for="Monday">Mon</label>
+            </div>
+            <div>
+                <input type="radio" id="Tuesday" name="dayOfTheWeek" value="Tuesday" />
+                <label for="Tuesday">Tue</label>
+            </div>
+            <div>
+                <input type="radio" id="Wednesday" name="dayOfTheWeek" value="Wednesday" />
+                <label for="Wednesday">Wed</label>
+            </div>
+            <div>
+                <input type="radio" id="Thursday" name="dayOfTheWeek" value="Thursday" />
+                <label for="Thursday">Thu</label>
+            </div>
+            <div>
+                <input type="radio" id="Friday" name="dayOfTheWeek" value="Friday" />
+                <label for="Friday">Fri</label>
+            </div>
+            <div>
+                <input type="radio" id="Saturday" name="dayOfTheWeek" value="Saturday" />
+                <label for="Saturday">Sat</label>
+            </div>
+            <div>
+                <input type="radio" id="Sunday" name="dayOfTheWeek" value="Sunday" />
+                <label for="Sunday">Sun</label>
+            </div>
+        </div>
+      </fieldset>
+    
     <div id="schedule">
         <div>
             <h2>Claregalway &rArr;&nbsp;Galway</h2>

@@ -101,34 +101,9 @@ function filterSchedule(schedule) {
   return filteredSchedule;
 }
 
-const today = new Date();
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const dayOfWeek = weekdays[today.getDay()];
-
-const dayOfWeekElement = document.getElementById("dayOfWeek");
-dayOfWeekElement.innerHTML = `Today is: <b>${dayOfWeek}</b>. Time is: <b>${getCurrentTime()}</b>`;
-
-const galwaySchedule = filterSchedule(toGalwaySchedule(dayOfWeek));
-const claregalwaySchedule = filterSchedule(toClaregalwaySchedule(dayOfWeek));
-
-const galwayList = document.getElementById("claregalwayToGalway");
-const claregalwayList = document.getElementById("galwayToClaregalway");
-
-galwaySchedule.forEach(entry => {
-  const listItem = document.createElement("li");
-  listItem.textContent = `${entry.time}`;
-  galwayList.appendChild(listItem);
-});
-
-claregalwaySchedule.forEach(entry => {
-  const listItem = document.createElement("li");
-  listItem.textContent = `${entry.time}`;
-  claregalwayList.appendChild(listItem);
-});
-
 function updateSchedule() {
-    const daySelect = document.getElementById("daySelect");
-    const selectedDay = daySelect.value;
+    const selectedDay = document.querySelector('input[name="dayOfTheWeek"]:checked').value;
+    console.log("Selected day:", selectedDay);
     
     const galwaySchedule = toGalwaySchedule(selectedDay);
     const claregalwaySchedule = toClaregalwaySchedule(selectedDay);
@@ -169,9 +144,23 @@ function updateSchedule() {
     }
 }
 
-document.getElementById("daySelect").addEventListener("change", updateSchedule);
+const today = new Date();
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dayOfWeek = weekdays[today.getDay()];
 
-// Initialize schedule for today
+const dayOfWeekElement = document.getElementById("dayOfWeek");
+dayOfWeekElement.innerHTML = `Today is: <b>${dayOfWeek}</b>. Time is: <b>${getCurrentTime()}</b>`;
+
+const galwaySchedule = filterSchedule(toGalwaySchedule(dayOfWeek));
+const claregalwaySchedule = filterSchedule(toClaregalwaySchedule(dayOfWeek));
+
+const galwayList = document.getElementById("claregalwayToGalway");
+const claregalwayList = document.getElementById("galwayToClaregalway");
+
+document.querySelectorAll('input[name="dayOfTheWeek"]').forEach((radio) => {
+    radio.addEventListener("change", updateSchedule);
+});
+
 updateSchedule();
   
 document.getElementById('refreshButton').addEventListener('click', function() {

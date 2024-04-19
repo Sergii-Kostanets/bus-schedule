@@ -5,16 +5,19 @@
     text-align: center;
 }
 h1 {
-    font-size: 20px;
+    font-size: 22px;
+    margin: 5px 0px;
+    text-transform: uppercase;
 }
 h2 {
     font-size: 16px;
-
+    margin: 5px 5px;
 }
 p,
 label,
 select,
-option {
+option,
+fieldset {
     font-size: 12px;
 }
 li {
@@ -29,16 +32,26 @@ li {
 }
 #refreshButton {
     position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 5px 7px;
+    top: 30%;
+    right: 47%;
+    padding: 5px 8px;
     background-color: #dadada;
-    color: #000000;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 24px;
 }
 #refreshButton:hover {
     background-color: #ff0000; /* Adjust hover background color as needed */
+}
+fieldset > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+fieldset > div > div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
 }
