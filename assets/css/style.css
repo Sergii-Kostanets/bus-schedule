@@ -32,18 +32,17 @@ li {
 }
 #refreshButton {
     position: fixed;
+    right: 43%;
     top: 30%;
-    right: 47%;
-    padding: 5px 8px;
-    background-color: #dadada;
-    color: #fff;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 24px;
+    width: 50px;
+    height: 50px;
 }
-#refreshButton:hover {
-    background-color: #ff0000; /* Adjust hover background color as needed */
+#refreshButton > img {
+    width: 50px;
+    height: 50px;
 }
 fieldset > div {
     display: flex;
