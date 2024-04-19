@@ -31,9 +31,6 @@ li {
     margin: 0 auto;
 }
 #refreshButton {
-    position: fixed;
-    right: 43%;
-    top: 30%;
     border: none;
     border-radius: 50%;
     cursor: pointer;
