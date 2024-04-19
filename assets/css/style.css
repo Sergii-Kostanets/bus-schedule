@@ -78,12 +78,13 @@ fieldset > legend {
 }
 fieldset > div {
     display: flex;
-    justify-content: space-between;
-    margin: 3px;
-    padding: 6px 3px;
+    justify-content: space-around;
+    margin: 3px auto;
+    padding: 6px 10px;
     background-color: rgba(0, 0, 0, 0.274);
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 7px;
+    max-width: 300px;
 }
 fieldset > div > div {
     display: flex;
