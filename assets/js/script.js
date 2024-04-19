@@ -1,3 +1,9 @@
+var button = document.getElementById("refreshButton");
+
+setTimeout(function() {
+    button.classList.remove("clicked");
+}, 1000);
+
 const toGalway = [
   { day: 'M-F', time: '07:00' },
   { day: 'M-F', time: '07:25' },
@@ -103,7 +109,6 @@ function filterSchedule(schedule) {
 
 function updateSchedule() {
     const selectedDay = document.querySelector('input[name="dayOfTheWeek"]:checked').value;
-    console.log("Selected day:", selectedDay);
     
     const galwaySchedule = toGalwaySchedule(selectedDay);
     const claregalwaySchedule = toClaregalwaySchedule(selectedDay);
