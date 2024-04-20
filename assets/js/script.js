@@ -46,7 +46,6 @@ const toClaregalway = [
   { day: 'M-Su', time: '16:10' },
   { day: 'M-F', time: '16:20' },
   { day: 'M-F', time: '16:40' },
-  { day: 'M-F', time: '17:10' },
   { day: 'M-Sa', time: '17:10' },
   { day: 'M-F', time: '17:20' },
   { day: 'M-Sa', time: '17:40' },
