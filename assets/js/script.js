@@ -130,6 +130,19 @@ function updateSchedule() {
     claregalwayList.innerHTML = ""; // Clear previous list items
     
     if (selectedDay === "Today") {
+
+// Saturday hotfix start
+const today = new Date();
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dayOfWeek = weekdays[today.getDay()];
+    
+const galwaySchedule = toGalwaySchedule(dayOfWeek);
+const claregalwaySchedule = toClaregalwaySchedule(dayOfWeek);
+  
+const galwayList = document.getElementById("claregalwayToGalway");
+const claregalwayList = document.getElementById("galwayToClaregalway");
+// Saturday hotfix end
+
       const filteredGalwaySchedule = filterSchedule(galwaySchedule);
       const filteredClaregalwaySchedule = filterSchedule(claregalwaySchedule);
   
