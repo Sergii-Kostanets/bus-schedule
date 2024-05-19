@@ -1,10 +1,4 @@
-var button = document.getElementById("refreshButton");
-
-setTimeout(function() {
-    button.classList.remove("clicked");
-}, 5000);
-
-const toGalway = [
+const ClaregalwayGalway = [
   { day: 'M-F', time: '07:00' },
   { day: 'M-F', time: '07:25' },
   { day: 'M-F', time: '07:45' },
@@ -31,7 +25,7 @@ const toGalway = [
   { day: 'M-Sa', time: '20:35' }
 ];
 
-const toClaregalway = [
+const GalwayClaregalway = [
   { day: 'M-F', time: '08:00' },
   { day: 'M-Sa', time: '09:05' },
   { day: 'M-Sa', time: '09:35' },
@@ -57,26 +51,26 @@ const toClaregalway = [
   { day: 'M-Su', time: '21:10' }
 ];
 
-function toGalwaySchedule(day) {
+function ClaregalwayGalwaySchedule(day) {
   let schedule = [];
   if (day === 'Saturday') {
-    schedule = toGalway.filter(entry => entry.day === 'M-Sa' || entry.day === 'Sa' || entry.day === 'M-Su');
+    schedule = ClaregalwayGalway.filter(entry => entry.day === 'M-Sa' || entry.day === 'Sa' || entry.day === 'M-Su');
   } else if (day === 'Sunday') {
-    schedule = toGalway.filter(entry => entry.day === 'M-Su' || entry.day === 'Sun');
+    schedule = ClaregalwayGalway.filter(entry => entry.day === 'M-Su' || entry.day === 'Sun');
   } else {
-    schedule = toGalway.filter(entry => entry.day.includes('M-F') || entry.day === 'M-Sa' || entry.day === 'M-Su');
+    schedule = ClaregalwayGalway.filter(entry => entry.day.includes('M-F') || entry.day === 'M-Sa' || entry.day === 'M-Su');
   }
   return schedule;
 }
 
-function toClaregalwaySchedule(day) {
+function GalwayClaregalwaySchedule(day) {
   let schedule = [];
   if (day === 'Saturday') {
-    schedule = toClaregalway.filter(entry => entry.day === 'M-Sa' || entry.day === 'Sa' || entry.day === 'M-Su');
+    schedule = GalwayClaregalway.filter(entry => entry.day === 'M-Sa' || entry.day === 'Sa' || entry.day === 'M-Su');
   } else if (day === 'Sunday') {
-    schedule = toClaregalway.filter(entry => entry.day === 'M-Su' || entry.day === 'Sun');
+    schedule = GalwayClaregalway.filter(entry => entry.day === 'M-Su' || entry.day === 'Sun');
   } else {
-    schedule = toClaregalway.filter(entry => entry.day.includes('M-F') || entry.day === 'M-Sa' || entry.day === 'M-Su');
+    schedule = GalwayClaregalway.filter(entry => entry.day.includes('M-F') || entry.day === 'M-Sa' || entry.day === 'M-Su');
   }
   return schedule;
 }
@@ -119,8 +113,8 @@ function updateSchedule() {
 
     const selectedDay = document.querySelector('input[name="dayOfTheWeek"]:checked').value;
     
-    const galwaySchedule = toGalwaySchedule(selectedDay);
-    const claregalwaySchedule = toClaregalwaySchedule(selectedDay);
+    const galwaySchedule = ClaregalwayGalwaySchedule(selectedDay);
+    const claregalwaySchedule = GalwayClaregalwaySchedule(selectedDay);
   
     const galwayList = document.getElementById("claregalwayToGalway");
     const claregalwayList = document.getElementById("galwayToClaregalway");
@@ -135,8 +129,8 @@ const today = new Date();
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const dayOfWeek = weekdays[today.getDay()];
     
-const galwaySchedule = toGalwaySchedule(dayOfWeek);
-const claregalwaySchedule = toClaregalwaySchedule(dayOfWeek);
+const galwaySchedule = ClaregalwayGalwaySchedule(dayOfWeek);
+const claregalwaySchedule = GalwayClaregalwaySchedule(dayOfWeek);
   
 const galwayList = document.getElementById("claregalwayToGalway");
 const claregalwayList = document.getElementById("galwayToClaregalway");
@@ -178,8 +172,8 @@ const dayOfWeek = weekdays[today.getDay()];
 const dayOfWeekElement = document.getElementById("dayOfWeek");
 dayOfWeekElement.innerHTML = `Today is: <b>${dayOfWeek}</b>. Time is: <b>${getCurrentTime()}</b>`;
 
-const galwaySchedule = filterSchedule(toGalwaySchedule(dayOfWeek));
-const claregalwaySchedule = filterSchedule(toClaregalwaySchedule(dayOfWeek));
+const galwaySchedule = filterSchedule(ClaregalwayGalwaySchedule(dayOfWeek));
+const claregalwaySchedule = filterSchedule(GalwayClaregalwaySchedule(dayOfWeek));
 
 const galwayList = document.getElementById("claregalwayToGalway");
 const claregalwayList = document.getElementById("galwayToClaregalway");
