@@ -1,4 +1,4 @@
-console.log('Hello, npm!');
+console.log('Hello, setup-node@v4!');
 
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();
