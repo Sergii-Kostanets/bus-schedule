@@ -1,4 +1,4 @@
-console.log('Hello, Build script placeholder!');
+console.log('Hello, 1!');
 
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();
