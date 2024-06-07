@@ -16,42 +16,9 @@
     <a href="/">
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
-    <p id="dayOfWeek"></p>
 
-    <fieldset>
-        <div>
-            <div>
-                <input type="radio" id="Today" name="dayOfTheWeek" value="Today" checked />
-                <label for="Today" class="checked">Today</label>
-            </div>
-            <div>
-                <input type="radio" id="Workday" name="dayOfTheWeek" value="Workday" />
-                <label for="Workday">MO-FR</label>
-            </div>
-            <div>
-                <input type="radio" id="Saturday" name="dayOfTheWeek" value="Saturday" />
-                <label for="Saturday">SA</label>
-            </div>
-            <div>
-                <input type="radio" id="Sunday" name="dayOfTheWeek" value="Sunday" />
-                <label for="Sunday">SU</label>
-            </div>
-        </div>
-        <p>P.S: Ongoing development</p>
-    </fieldset>
-
-    <div id="schedule">
-        <div>
-            <h2>Claregalway &rArr;&nbsp;Galway</h2>
-            <ul id="claregalwayToGalway"></ul>
-        </div>
-        <div>
-            <h2>Galway&nbsp;&rArr; Claregalway</h2>    
-            <ul id="galwayToClaregalway"></ul>
-        </div>
-    </div>
-
-    <div id="schedule-container" style="display: flex;">
+    <div id="schedule-container" style="display: flex; color: aliceblue;">
+        <div id="schedule-days"></div>
         <div id="departure"></div>
         <div id="arrival"></div>
     </div>
