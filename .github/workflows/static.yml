@@ -45,8 +45,8 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
           # Create env.js file with secrets
-          echo "function sheetIdSecret() { return '${{ secrets.SHEET_ID }}'; }" > ./assets/js/env.js
-          echo "function apiKeySecret() { return '${{ secrets.API_KEY }}'; }" >> ./assets/js/env.js
+          echo "function sheetIdSecret() { return '${{ secrets.SHEET_ID }}'; }" > ./assets/js/env.prod.js
+          echo "function apiKeySecret() { return '${{ secrets.API_KEY }}'; }" >> ./assets/js/env.prod.js
           npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

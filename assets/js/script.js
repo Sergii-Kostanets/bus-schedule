@@ -1,4 +1,4 @@
-console.log('Hello, 1!');
+console.log('Hello, 2!');
 
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();
