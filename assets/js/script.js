@@ -1,5 +1,3 @@
-console.log('Hello, 4!');
-
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();
 const range = '427 G->T!D1:D25';
