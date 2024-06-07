@@ -1,4 +1,4 @@
-console.log('Hello, setup-node@v4!');
+console.log('Hello, package.json!');
 
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();

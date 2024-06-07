@@ -1,0 +1,20 @@
+{
+  "name": "bus-schedule",
+  "version": "1.0.0",
+  "description": "Schedule for my local bus",
+  "main": "env.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergii-Kostanets/bus-schedule.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sergii-Kostanets/bus-schedule/issues"
+  },
+  "homepage": "https://github.com/Sergii-Kostanets/bus-schedule#readme"
+}
