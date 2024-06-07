@@ -5,8 +5,13 @@ const range = '427 G->T!D1:D25';
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 
 fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => console.error('Error fetching data:', error));
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('schedule-container');
+        data.values.forEach(row => {
+          const rowElement = document.createElement('div');
+          rowElement.textContent = row.join(', ');
+          container.appendChild(rowElement);
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
