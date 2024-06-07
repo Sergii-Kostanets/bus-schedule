@@ -183,7 +183,3 @@ document.querySelectorAll('input[name="dayOfTheWeek"]').forEach((radio) => {
 });
 
 updateSchedule();
-  
-document.getElementById('refreshButton').addEventListener('click', function() {
-    location.reload();
-});
