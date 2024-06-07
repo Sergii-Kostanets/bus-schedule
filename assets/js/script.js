@@ -5,47 +5,39 @@ const bus427GalwayTuamSchedule = '427 G->T!A1:A25';
 const bus427GalwayTuamGalwayATU = '427 G->T!B1:B25';
 const bus427GalwayTuamGalwayCity = '427 G->T!C1:C25';
 const bus427GalwayTuamClaregalway = '427 G->T!D1:D25';
+const bus427GalwayTuamLoughgeorge = '427 G->T!E1:E25';
+const bus427GalwayTuamKnockdoe = '427 G->T!F1:F25';
+const bus427GalwayTuamCorofinCross = '427 G->T!G1:G25';
+const bus427GalwayTuamClaretuam = '427 G->T!H1:H25';
+const bus427GalwayTuamTuam = '427 G->T!I1:I25';
+const bus427GalwayTuamDunmore = '427 G->T!G1:G25';
 
 let schedule = bus427GalwayTuamSchedule;
 let departure = bus427GalwayTuamGalwayCity;
 let arrival = bus427GalwayTuamClaregalway;
 
-const urlSchedule = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${schedule}?key=${apiKey}`;
-const urlDeparture = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${departure}?key=${apiKey}`;
-const urlArrival = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${arrival}?key=${apiKey}`;
+function formUrl (sheetId, apiKey, range) {
+    return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+}
 
-fetch(urlSchedule)
-    .then(response => response.json())
-    .then(data => {
-        const schedule = document.getElementById('schedule-days');
-        data.values.forEach(row => {
-          const rowElement = document.createElement('div');
-          rowElement.textContent = row.join(', ');
-          schedule.appendChild(rowElement);
-        });
-    })
-    .catch(error => console.error('Error fetching data:', error));
+const urlSchedule = formUrl(sheetId, apiKey, schedule);
+const urlDeparture = formUrl(sheetId, apiKey, departure);
+const urlArrival = formUrl(sheetId, apiKey, arrival);
 
-    fetch(urlDeparture)
+function showSchedule(url, elementId) {
+    fetch(url)
         .then(response => response.json())
         .then(data => {
-            const departure = document.getElementById('departure');
+            const element = document.getElementById(elementId);
             data.values.forEach(row => {
-              const rowElement = document.createElement('div');
-              rowElement.textContent = row.join(', ');
-              departure.appendChild(rowElement);
+                const rowElement = document.createElement('div');
+                rowElement.textContent = row.join(', ');
+                element.appendChild(rowElement);
             });
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => console.error('Error fetching data: ', error));
+}
 
-fetch(urlArrival)
-    .then(response => response.json())
-    .then(data => {
-        const arrival = document.getElementById('arrival');
-        data.values.forEach(row => {
-            const rowElement = document.createElement('div');
-            rowElement.textContent = row.join(', ');
-            arrival.appendChild(rowElement);
-        });
-    })
-    .catch(error => console.error('Error fetching data:', error));
+showSchedule(urlSchedule, 'schedule-days');
+showSchedule(urlDeparture, 'departure');
+showSchedule(urlArrival, 'arrival');
