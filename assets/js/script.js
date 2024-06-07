@@ -3,8 +3,8 @@
 // const apiKey = apiKeySecret();
 
 // Netlify
-const sheetId = '<%= process.env.SHEET_ID %>';
-const apiKey = '<%= process.env.API_KEY %>';
+const sheetId = process.env.SHEET_ID;
+const apiKey = process.env.API_KEY;
 
 const range = '427 G->T!D1:D25';
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
