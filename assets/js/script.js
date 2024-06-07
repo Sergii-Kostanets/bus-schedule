@@ -1,4 +1,4 @@
-console.log('Hello, world!');
+console.log('Hello, npm!');
 
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();
