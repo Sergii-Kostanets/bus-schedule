@@ -1,4 +1,4 @@
-console.log('Hello, package.json!');
+console.log('Hello, Build script placeholder!');
 
 const sheetId = sheetIdSecret();
 const apiKey = apiKeySecret();
