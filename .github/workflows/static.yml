@@ -44,7 +44,7 @@ jobs:
           SHEET_ID: ${{ secrets.SHEET_ID }}
           API_KEY: ${{ secrets.API_KEY }}
         run: |
-          # Create env.js file with secrets
+          # Create env.prod.js file with secrets
           echo "function sheetIdSecret() { return '${{ secrets.SHEET_ID }}'; }" > ./assets/js/env.prod.js
           echo "function apiKeySecret() { return '${{ secrets.API_KEY }}'; }" >> ./assets/js/env.prod.js
           npm run build

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Schedule for my local bus",
   "main": "env.js",
+  "dev": "env.prod.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo 'Build script placeholder'"
