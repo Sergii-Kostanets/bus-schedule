@@ -33,21 +33,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install dependencies
-        run: npm install
-      - name: Build project
-        env:
-          SHEET_ID: ${{ secrets.SHEET_ID }}
-          API_KEY: ${{ secrets.API_KEY }}
-        run: |
-          # Create env.prod.js file with secrets
-          echo "function sheetIdSecret() { return '${{ secrets.SHEET_ID }}'; }" > ./assets/js/env.prod.js
-          echo "function apiKeySecret() { return '${{ secrets.API_KEY }}'; }" >> ./assets/js/env.prod.js
-          npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
