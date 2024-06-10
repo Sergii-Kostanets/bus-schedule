@@ -24,20 +24,59 @@ const urlSchedule = formUrl(sheetId, apiKey, schedule);
 const urlDeparture = formUrl(sheetId, apiKey, departure);
 const urlArrival = formUrl(sheetId, apiKey, arrival);
 
-function showSchedule(url, elementId) {
-    fetch(url)
+function fetchSchedule(url, range) {
+    return fetch(url)
+    // return fetch(`${url}&range=${range}`)
         .then(response => response.json())
-        .then(data => {
-            const element = document.getElementById(elementId);
-            data.values.forEach(row => {
-                const rowElement = document.createElement('div');
-                rowElement.textContent = row.join(', ');
-                element.appendChild(rowElement);
-            });
-        })
-        .catch(error => console.error('Error fetching data: ', error));
+        .then(data => data.values.map(row => row[0]))
+        .catch(error => {console.error('Error fetching data: ', error);
+            return [];}
+    );
 }
 
-showSchedule(urlSchedule, 'schedule-days');
-showSchedule(urlDeparture, 'departure');
-showSchedule(urlArrival, 'arrival');
+Promise.all([
+    fetchSchedule(urlSchedule),
+    fetchSchedule(urlDeparture),
+    fetchSchedule(urlArrival)
+]).then(([scheduleArray, departureArray, arrivalArray]) => {
+    // Check if all arrays are defined and have the same length
+    if (scheduleArray && departureArray && arrivalArray && 
+        scheduleArray.length && departureArray.length && arrivalArray.length &&
+        scheduleArray.length === departureArray.length && departureArray.length === arrivalArray.length) {
+
+        const combinedArray = scheduleArray.map((schedule, index) => ({
+            schedule: schedule,
+            departure: departureArray[index],
+            arrival: arrivalArray[index]
+        }));
+
+        console.log('Combined Array: ', combinedArray);
+
+        // Display the combined data in HTML
+        const container = document.getElementById('combined-schedule');
+        combinedArray.forEach(item => {
+            const itemElement = document.createElement('div');
+
+            // Create separate divs for schedule, departure, and arrival
+            const scheduleDiv = document.createElement('div');
+            scheduleDiv.textContent = `${item.schedule}`;
+            const departureDiv = document.createElement('div');
+            departureDiv.textContent = `${item.departure}`;
+            const arrivalDiv = document.createElement('div');
+            arrivalDiv.textContent = `${item.arrival}`;
+        
+            // Append each div to the item element
+            itemElement.appendChild(scheduleDiv);
+            itemElement.appendChild(departureDiv);
+            itemElement.appendChild(arrivalDiv);
+        
+            // Append the item element to the container
+            container.appendChild(itemElement);
+        });
+        // Further processing of combinedArray if needed
+    } else {
+        console.error('Error: Arrays are not defined or lengths do not match.');
+    }
+}).catch(error => {
+    console.error('Error in fetching data: ', error);
+});

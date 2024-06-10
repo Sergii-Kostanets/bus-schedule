@@ -12,16 +12,38 @@
 </head>
 <body>
     <div class="overlay"></div>
-    <!-- <h1>Burkesbus</h1> -->
     <a href="/">
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
 
-    <div id="schedule-container" style="display: flex; color: aliceblue;">
-        <div id="schedule-days"></div>
-        <div id="departure"></div>
-        <div id="arrival"></div>
+    <div>
+        <label for="schedule-select">Route:</label>
+        <select id="schedule-select">
+            <option value="427 G->T!A1:A25">427 from Galway to Tuam/Dunmore</option>
+            <option value="427 T->G!A1:A25">427 from Tuam/Dunmore to Galway</option>
+            <!-- Add more options if needed -->
+        </select>
     </div>
+
+    <div>
+        <label for="departure-select">Departure:</label>
+        <select id="departure-select">
+            <option value="427 G->T!C1:C25">Galway City</option>
+            <option value="427 T->G!H1:H25">Claregalway</option>
+            <!-- Add more options if needed -->
+        </select>
+    </div>
+
+    <div>
+        <label for="arrival-select">Arrival:</label>
+        <select id="arrival-select">
+            <option value="427 G->T!D1:D25">Claregalway</option>
+            <option value="427 T->G!I1:I25">Galway City</option>
+            <!-- Add more options if needed -->
+        </select>
+    </div>
+
+    <div id="combined-schedule" style="color: aliceblue;"></div>
 
     <script src="/assets/js/script.js"></script>
 </body>
