@@ -1,7 +1,7 @@
 const sheetId = "1774H66Bt1Gl9MT_YLxuFpbDZtzcPe4XQgjB1p9Eiovo";
 const apiKey = "AIzaSyD8XLZMEgRsPCeKzo5aZ0eSrN7XolPrJhQ";
 
-function formUrl (sheetId, apiKey, range) {
+function formUrl(sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
 
@@ -25,18 +25,18 @@ function populateOptions(routeValue) {
         arrivalRange = '427_G->T!B1:J1';
     } else if (routeValue === '427-Tuam-Galway') {
         departureRange = '427_T->G!B1:K1';
-        arrivalRange = '427_T->G!B1:K';
+        arrivalRange = '427_T->G!B1:K1';
     } else if (routeValue === '435') {
         console.log('No schedule for 435 yet');
     } else {
         console.log('Invalid route selected');
     }
-    
-    urlDeparture = null;
+
+    let urlDeparture = null;
     if (departureRange) {
         urlDeparture = formUrl(sheetId, apiKey, departureRange);
     }
-    urlArrival = null;
+    let urlArrival = null;
     if (arrivalRange) {
         urlArrival = formUrl(sheetId, apiKey, arrivalRange);
     }
@@ -60,11 +60,11 @@ function populateOptions(routeValue) {
             })
             .catch(error => console.error('Error fetching data: ', error));
     }
-    
+
     if (urlDeparture && routeValue !== '435') {
         showSchedule(urlDeparture, 'departure-select', 2);
         departureSelect.disabled = false;
-        }
+    }
     if (urlArrival && routeValue !== '435') {
         showSchedule(urlArrival, 'arrival-select', 8);
         arrivalSelect.disabled = false;
@@ -84,10 +84,16 @@ document.getElementById('schedule-form').addEventListener('submit', function(eve
     const selectedRoute = formData.get('route');
     const selectedDeparture = formData.get('departure');
     const selectedArrival = formData.get('arrival');
+
     console.log('Selected Route:', selectedRoute);
     console.log('Selected Departure:', selectedDeparture);
     console.log('Selected Arrival:', selectedArrival);
-    // Call function to fetch combined schedule or perform other actions
+
+    // Construct the new URL with query parameters
+    const newUrl = `/route.html?departure=${encodeURIComponent(selectedDeparture)}&arrival=${encodeURIComponent(selectedArrival)}`;
+    
+    // Redirect to the new URL
+    window.location.href = newUrl;
 });
 
 // Initial population of options based on default route
