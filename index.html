@@ -16,34 +16,27 @@
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
 
-    <div>
-        <label for="schedule-select">Route:</label>
-        <select id="schedule-select">
-            <option value="427 G->T!A1:A25">427 from Galway to Tuam/Dunmore</option>
-            <option value="427 T->G!A1:A25">427 from Tuam/Dunmore to Galway</option>
-            <!-- Add more options if needed -->
+    <form id="schedule-form">
+        <!-- <label for="route-select">Choose Route:</label> -->
+        <select id="route-select" name="route">
+            <option value="427-Galway-Tuam">427 Galway - Tuam/Dunmore</option>
+            <option value="427-Tuam-Galway">427 Tuam/Dunmore - Galway</option>
+            <!-- <option value="435">435</option> -->
         </select>
-    </div>
-
-    <div>
-        <label for="departure-select">Departure:</label>
-        <select id="departure-select">
-            <option value="427 G->T!C1:C25">Galway City</option>
-            <option value="427 T->G!H1:H25">Claregalway</option>
-            <!-- Add more options if needed -->
+        <br>
+        <label for="departure-select" style="color: beige;">Departure:</label><br>
+        <select id="departure-select" name="departure" disabled>
+            <!-- Options will be dynamically populated -->
         </select>
-    </div>
-
-    <div>
-        <label for="arrival-select">Arrival:</label>
-        <select id="arrival-select">
-            <option value="427 G->T!D1:D25">Claregalway</option>
-            <option value="427 T->G!I1:I25">Galway City</option>
-            <!-- Add more options if needed -->
+        <br>
+        <label for="arrival-select" style="color: bisque;">Arrival:</label><br>
+        <select id="arrival-select" name="arrival" disabled>
+            <!-- Options will be dynamically populated -->
         </select>
-    </div>
-
-    <div id="combined-schedule" style="color: aliceblue;"></div>
+        <br>
+        <button type="submit">Submit</button>
+        <br>
+    </form>
 
     <script src="/assets/js/script.js"></script>
 </body>

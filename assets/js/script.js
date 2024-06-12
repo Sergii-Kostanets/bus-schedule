@@ -1,82 +1,95 @@
 const sheetId = "1774H66Bt1Gl9MT_YLxuFpbDZtzcPe4XQgjB1p9Eiovo";
 const apiKey = "AIzaSyD8XLZMEgRsPCeKzo5aZ0eSrN7XolPrJhQ";
 
-const bus427GalwayTuamSchedule = '427 G->T!A1:A25';
-const bus427GalwayTuamGalwayATU = '427 G->T!B1:B25';
-const bus427GalwayTuamGalwayCity = '427 G->T!C1:C25';
-const bus427GalwayTuamClaregalway = '427 G->T!D1:D25';
-const bus427GalwayTuamLoughgeorge = '427 G->T!E1:E25';
-const bus427GalwayTuamKnockdoe = '427 G->T!F1:F25';
-const bus427GalwayTuamCorofinCross = '427 G->T!G1:G25';
-const bus427GalwayTuamClaretuam = '427 G->T!H1:H25';
-const bus427GalwayTuamTuam = '427 G->T!I1:I25';
-const bus427GalwayTuamDunmore = '427 G->T!G1:G25';
-
-let schedule = bus427GalwayTuamSchedule;
-let departure = bus427GalwayTuamGalwayCity;
-let arrival = bus427GalwayTuamClaregalway;
-
 function formUrl (sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
 
-const urlSchedule = formUrl(sheetId, apiKey, schedule);
-const urlDeparture = formUrl(sheetId, apiKey, departure);
-const urlArrival = formUrl(sheetId, apiKey, arrival);
+// Function to populate the dropdown options based on the selected route
+function populateOptions(routeValue) {
+    const departureSelect = document.getElementById('departure-select');
+    const arrivalSelect = document.getElementById('arrival-select');
 
-function fetchSchedule(url, range) {
-    return fetch(url)
-    // return fetch(`${url}&range=${range}`)
-        .then(response => response.json())
-        .then(data => data.values.map(row => row[0]))
-        .catch(error => {console.error('Error fetching data: ', error);
-            return [];}
-    );
+    // Clear existing options
+    departureSelect.innerHTML = '';
+    arrivalSelect.innerHTML = '';
+
+    // Enable the selects
+    departureSelect.disabled = true;
+    arrivalSelect.disabled = true;
+
+    // Determine the range based on the selected route
+    let departureRange, arrivalRange;
+    if (routeValue === '427-Galway-Tuam') {
+        departureRange = '427_G->T!B1:J1';
+        arrivalRange = '427_G->T!B1:J1';
+    } else if (routeValue === '427-Tuam-Galway') {
+        departureRange = '427_T->G!B1:K1';
+        arrivalRange = '427_T->G!B1:K';
+    } else if (routeValue === '435') {
+        console.log('No schedule for 435 yet');
+    } else {
+        console.log('Invalid route selected');
+    }
+    
+    urlDeparture = null;
+    if (departureRange) {
+        urlDeparture = formUrl(sheetId, apiKey, departureRange);
+    }
+    urlArrival = null;
+    if (arrivalRange) {
+        urlArrival = formUrl(sheetId, apiKey, arrivalRange);
+    }
+
+    function showSchedule(url, elementId, selectedOption) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const element = document.getElementById(elementId);
+                let i = 0;
+                data.values[0].forEach(option => {
+                    i++;
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    if (i === selectedOption) {
+                        optionElement.selected = true;
+                    }
+                    element.appendChild(optionElement);
+                });
+            })
+            .catch(error => console.error('Error fetching data: ', error));
+    }
+    
+    if (urlDeparture && routeValue !== '435') {
+        showSchedule(urlDeparture, 'departure-select', 2);
+        departureSelect.disabled = false;
+        }
+    if (urlArrival && routeValue !== '435') {
+        showSchedule(urlArrival, 'arrival-select', 8);
+        arrivalSelect.disabled = false;
+    }
 }
 
-Promise.all([
-    fetchSchedule(urlSchedule),
-    fetchSchedule(urlDeparture),
-    fetchSchedule(urlArrival)
-]).then(([scheduleArray, departureArray, arrivalArray]) => {
-    // Check if all arrays are defined and have the same length
-    if (scheduleArray && departureArray && arrivalArray && 
-        scheduleArray.length && departureArray.length && arrivalArray.length &&
-        scheduleArray.length === departureArray.length && departureArray.length === arrivalArray.length) {
-
-        const combinedArray = scheduleArray.map((schedule, index) => ({
-            schedule: schedule,
-            departure: departureArray[index],
-            arrival: arrivalArray[index]
-        }));
-
-        console.log('Combined Array: ', combinedArray);
-
-        // Display the combined data in HTML
-        const container = document.getElementById('combined-schedule');
-        combinedArray.forEach(item => {
-            const itemElement = document.createElement('div');
-
-            // Create separate divs for schedule, departure, and arrival
-            const scheduleDiv = document.createElement('div');
-            scheduleDiv.textContent = `${item.schedule}`;
-            const departureDiv = document.createElement('div');
-            departureDiv.textContent = `${item.departure}`;
-            const arrivalDiv = document.createElement('div');
-            arrivalDiv.textContent = `${item.arrival}`;
-        
-            // Append each div to the item element
-            itemElement.appendChild(scheduleDiv);
-            itemElement.appendChild(departureDiv);
-            itemElement.appendChild(arrivalDiv);
-        
-            // Append the item element to the container
-            container.appendChild(itemElement);
-        });
-        // Further processing of combinedArray if needed
-    } else {
-        console.error('Error: Arrays are not defined or lengths do not match.');
-    }
-}).catch(error => {
-    console.error('Error in fetching data: ', error);
+// Event listener for route select change
+document.getElementById('route-select').addEventListener('change', function() {
+    const routeValue = this.value;
+    populateOptions(routeValue);
 });
+
+// Event listener for form submit
+document.getElementById('schedule-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    const formData = new FormData(this);
+    const selectedRoute = formData.get('route');
+    const selectedDeparture = formData.get('departure');
+    const selectedArrival = formData.get('arrival');
+    console.log('Selected Route:', selectedRoute);
+    console.log('Selected Departure:', selectedDeparture);
+    console.log('Selected Arrival:', selectedArrival);
+    // Call function to fetch combined schedule or perform other actions
+});
+
+// Initial population of options based on default route
+const defaultRoute = document.getElementById('route-select').value;
+populateOptions(defaultRoute);
