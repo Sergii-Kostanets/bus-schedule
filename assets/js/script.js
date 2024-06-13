@@ -1,6 +1,7 @@
 const sheetId = "1774H66Bt1Gl9MT_YLxuFpbDZtzcPe4XQgjB1p9Eiovo";
 const apiKey = "AIzaSyD8XLZMEgRsPCeKzo5aZ0eSrN7XolPrJhQ";
 
+// Function to construct the URL for the Google Sheets API
 function formUrl(sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
@@ -14,24 +15,25 @@ function populateOptions(routeValue) {
     departureSelect.innerHTML = '';
     arrivalSelect.innerHTML = '';
 
-    // Enable the selects
+    // Disable the selects initially
     departureSelect.disabled = true;
     arrivalSelect.disabled = true;
 
     // Determine the range based on the selected route
     let departureRange, arrivalRange;
-    if (routeValue === '427-Galway-Tuam') {
-        departureRange = '427_G->T!B1:J1';
-        arrivalRange = '427_G->T!B1:J1';
-    } else if (routeValue === '427-Tuam-Galway') {
-        departureRange = '427_T->G!B1:K1';
-        arrivalRange = '427_T->G!B1:K1';
+    if (routeValue === '427-Galway->Tuam') {
+        departureRange = '427-Galway->Tuam!B1:J1';
+        arrivalRange = '427-Galway->Tuam!B1:J1';
+    } else if (routeValue === '427-Tuam->Galway') {
+        departureRange = '427-Tuam->Galway!B1:K1';
+        arrivalRange = '427-Tuam->Galway!B1:K1';
     } else if (routeValue === '435') {
         console.log('No schedule for 435 yet');
     } else {
         console.log('Invalid route selected');
     }
 
+    // Form the URLs for fetching data
     let urlDeparture = null;
     if (departureRange) {
         urlDeparture = formUrl(sheetId, apiKey, departureRange);
@@ -41,6 +43,7 @@ function populateOptions(routeValue) {
         urlArrival = formUrl(sheetId, apiKey, arrivalRange);
     }
 
+    // Function to fetch and display schedule options
     function showSchedule(url, elementId, selectedOption) {
         fetch(url)
             .then(response => response.json())
@@ -61,6 +64,7 @@ function populateOptions(routeValue) {
             .catch(error => console.error('Error fetching data: ', error));
     }
 
+    // Populate the dropdowns with the fetched data
     if (urlDeparture && routeValue !== '435') {
         showSchedule(urlDeparture, 'departure-select', 2);
         departureSelect.disabled = false;
@@ -90,12 +94,12 @@ document.getElementById('schedule-form').addEventListener('submit', function(eve
     console.log('Selected Arrival:', selectedArrival);
 
     // Construct the new URL with query parameters
-    const newUrl = `/route.html?departure=${encodeURIComponent(selectedDeparture)}&arrival=${encodeURIComponent(selectedArrival)}`;
+    const newUrl = `/route.html?route=${encodeURIComponent(selectedRoute)}&departure=${encodeURIComponent(selectedDeparture)}&arrival=${encodeURIComponent(selectedArrival)}`;
     
     // Redirect to the new URL
     window.location.href = newUrl;
 });
 
-// Initial population of options based on default route
+// Initial population of options based on the default route
 const defaultRoute = document.getElementById('route-select').value;
 populateOptions(defaultRoute);
