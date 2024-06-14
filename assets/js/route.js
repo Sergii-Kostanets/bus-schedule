@@ -16,9 +16,36 @@ function getQueryParams() {
     };
 }
 
-console.log('Route: ', getQueryParams()['route']); // DEBUG
-console.log('Depature: ', getQueryParams()['departure']); // DEBUG
-console.log('Arrival: ', getQueryParams()['arrival']); // DEBUG
+route = getQueryParams().route;
+console.log('Route:     ', route)
+departure = getQueryParams().departure;
+console.log('Departure: ', departure)
+arrival = getQueryParams().arrival;
+console.log('Arrival:   ', arrival)
+
+
+
+
+
+// Update the fetchSchedule function to accept a custom range
+function fetchSchedule(route, departure, arrival) {
+    const range = `${route}!A1:Z100`; // Adjust the range according to your data
+    const url = formUrl(sheetId, apiKey, range);
+
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => data.values.map(row => row[0]))
+        .catch(error => {console.error('Error fetching data: ', error);
+            return [];}
+    );
+}
+fetchSchedule(route).then(data => console.log(data));
+
+
+
+
+
+
 
 // Function to display the schedule
 function displaySchedule(route, departure, arrival) {
