@@ -34,37 +34,29 @@ function fetchSchedule(route, departure, arrival) {
 
     return fetch(url)
         .then(response => response.json())
-        .then(data => data.values.map(row => row[0]))
+        .then(data => {
+            // Find the indexes for departure and arrival
+            const headers = data.values[0];
+            const departureIndex = headers.indexOf(departure);
+            const arrivalIndex = headers.indexOf(arrival);
+
+            if (departureIndex === -1 || arrivalIndex === -1) {
+                throw new Error('Departure or Arrival location not found in the headers.');
+            }
+
+            // Extract relevant columns
+            return data.values.slice(1)  // Skip the header row
+                .map(row => ({
+                    day: row[0],  // Assuming 'day' is at index 0
+                    departureTime: row[departureIndex],
+                    arrivalTime: row[arrivalIndex]
+                }))
+        })
         .catch(error => {console.error('Error fetching data: ', error);
             return [];}
     );
 }
-fetchSchedule(route).then(data => console.log(data));
+fetchSchedule(route, departure, arrival).then(data => console.log(data));
 
-
-
-
-
-
-
-// Function to display the schedule
-function displaySchedule(route, departure, arrival) {
-    const range = `${route}!A1:Z100`; // Adjust the range according to your data
-    const url = formUrl(sheetId, apiKey, range);
-
-    return fetch(url)
-        .then(response => response.json())
-        .then(data => data.values.map(row => row))
-        .catch(error => {console.error('Error fetching data: ', error);
-            return [];}
-    );
-}
-
-// Get the query parameters from the URL
-const params = getQueryParams();
-if (params.route && params.departure && params.arrival) {
-    let test = displaySchedule(params.route, params.departure, params.arrival);
-    console.log(test)
-} else {
-    console.error('Departure or arrival parameter is missing in the URL.');
-}
+let fetchedSchedule = fetchSchedule(route, departure, arrival);
+console.log('fetchedSchedule: ', fetchedSchedule);
