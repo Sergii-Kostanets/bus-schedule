@@ -60,3 +60,46 @@ fetchSchedule(route, departure, arrival).then(data => console.log(data));
 
 let fetchedSchedule = fetchSchedule(route, departure, arrival);
 console.log('fetchedSchedule: ', fetchedSchedule);
+
+
+
+
+
+
+
+
+
+
+
+fetchSchedule(route, departure, arrival).then(data => {
+    const tableBody = document.getElementById('scheduleTable').querySelector('tbody');
+    tableBody.innerHTML = ''; // Clear existing rows
+
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        const dayTd = document.createElement('td');
+        const departureTd = document.createElement('td');
+        const arrivalTd = document.createElement('td');
+
+        dayTd.textContent = row.day;
+        departureTd.textContent = row.departureTime;
+        arrivalTd.textContent = row.arrivalTime;
+
+        tr.appendChild(dayTd);
+        tr.appendChild(departureTd);
+        tr.appendChild(arrivalTd);
+        tableBody.appendChild(tr);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
