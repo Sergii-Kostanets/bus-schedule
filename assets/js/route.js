@@ -95,16 +95,30 @@ function displaySchedule(data) {
     });
 }
 
+function updateCheckedClass(selectedValue) {
+    document.querySelectorAll('input[name="dayFilter"]').forEach(radio => {
+        const label = radio.parentElement;
+        if (radio.value === selectedValue) {
+            label.classList.add('checked');
+        } else {
+            label.classList.remove('checked');
+        }
+    });
+}
+
 fetchSchedule(route, departure, arrival).then(data => {
     // Initial display of schedule
-    const filteredData = filterSchedule(data, 'TODAY');
+    const initialFilter = 'TODAY';
+    const filteredData = filterSchedule(data, initialFilter);
     displaySchedule(filteredData);
+    updateCheckedClass(initialFilter);
 
     // Add event listeners to radio buttons
     document.querySelectorAll('input[name="dayFilter"]').forEach(radio => {
         radio.addEventListener('change', (event) => {
             const filteredData = filterSchedule(data, event.target.value);
             displaySchedule(filteredData);
+            updateCheckedClass(event.target.value);
         });
     });
 });

@@ -25,9 +25,10 @@ body {
     z-index: -1;
 }
 .logo {
-    width: 100%;
+    width: 80%;
     max-width: 400px;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
 }
 .logo:hover,
 .logo:active,
@@ -38,6 +39,24 @@ body {
     cursor: pointer;
     opacity: 0.8;
     outline: none;
+}
+
+#schedule-form > label {
+    display: block;
+}
+
+#schedule-form > select {
+    height: 30px;
+    border-radius: 5px;
+}
+
+#schedule-form,
+#schedule-form > label {
+    margin-top: 20px;
+}
+
+.checked {
+    color: #555;
 }
 
 #combined-schedule {
