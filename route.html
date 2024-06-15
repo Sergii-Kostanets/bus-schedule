@@ -15,14 +15,14 @@
     <a href="/">
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
-
     
-    
-    
-    <div id="schedule-container"></div> <!-- Container for the schedule -->
-    <div id="combined-schedule"></div> <!-- Container for the schedule -->
-
-
+    <div class="filter" style="color: aliceblue; margin-top: 10px;">
+        <label><input type="radio" name="dayFilter" value="ALL" checked> ALL</label>
+        <label><input type="radio" name="dayFilter" value="TODAY"> TODAY</label>
+        <label><input type="radio" name="dayFilter" value="MO-FR"> MO-FR</label>
+        <label><input type="radio" name="dayFilter" value="SAT"> SAT</label>
+        <label><input type="radio" name="dayFilter" value="SUN"> SUN</label>
+    </div>
 
     <table id="scheduleTable" border="0" style="color: aliceblue; margin: 0 auto;">
         <thead style="height: 50px;">

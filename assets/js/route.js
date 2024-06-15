@@ -23,10 +23,6 @@ console.log('Departure: ', departure)
 arrival = getQueryParams().arrival;
 console.log('Arrival:   ', arrival)
 
-
-
-
-
 // Update the fetchSchedule function to accept a custom range
 function fetchSchedule(route, departure, arrival) {
     const range = `${route}!A1:Z100`; // Adjust the range according to your data
@@ -61,17 +57,24 @@ fetchSchedule(route, departure, arrival).then(data => console.log(data));
 let fetchedSchedule = fetchSchedule(route, departure, arrival);
 console.log('fetchedSchedule: ', fetchedSchedule);
 
+function filterSchedule(data, filter) {
+    const today = new Date().toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
+    console.log('Today: ', today);
 
+    return data.filter(row => {
+        if (filter === 'TODAY') {
+            if (today === 'SAT') return row.day.includes('Sa') || row.day.includes('M-Su');
+            if (today === 'SUN') return row.day.includes('Su') || row.day.includes('Sun');
+            if (today != 'SAT' && today != 'SUN') return row.day.includes('M');
+        }
+        if (filter === 'MO-FR') return row.day.includes('M');
+        if (filter === 'SAT') return row.day.includes('Sa') || row.day.includes('M-Su');
+        if (filter === 'SUN') return row.day.includes('Su') || row.day.includes('Sun');
+        return true; // Default case, should not occur
+    });
+}
 
-
-
-
-
-
-
-
-
-fetchSchedule(route, departure, arrival).then(data => {
+function displaySchedule(data) {
     const tableBody = document.getElementById('scheduleTable').querySelector('tbody');
     tableBody.innerHTML = ''; // Clear existing rows
 
@@ -90,16 +93,17 @@ fetchSchedule(route, departure, arrival).then(data => {
         tr.appendChild(arrivalTd);
         tableBody.appendChild(tr);
     });
+}
+
+fetchSchedule(route, departure, arrival).then(data => {
+    // Initial display of schedule
+    displaySchedule(data);
+
+    // Add event listeners to radio buttons
+    document.querySelectorAll('input[name="dayFilter"]').forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            const filteredData = filterSchedule(data, event.target.value);
+            displaySchedule(filteredData);
+        });
+    });
 });
-
-
-
-
-
-
-
-
-
-
-
-
