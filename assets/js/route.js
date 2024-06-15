@@ -97,7 +97,8 @@ function displaySchedule(data) {
 
 fetchSchedule(route, departure, arrival).then(data => {
     // Initial display of schedule
-    displaySchedule(data);
+    const filteredData = filterSchedule(data, 'TODAY');
+    displaySchedule(filteredData);
 
     // Add event listeners to radio buttons
     document.querySelectorAll('input[name="dayFilter"]').forEach(radio => {

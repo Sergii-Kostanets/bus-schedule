@@ -12,6 +12,8 @@ body {
     background-position: center;
     height: 100dvh;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .overlay {
     position: absolute;

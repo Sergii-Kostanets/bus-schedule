@@ -15,14 +15,6 @@
     <a href="/">
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
-    
-    <div class="filter" style="color: aliceblue; margin-top: 10px;">
-        <label><input type="radio" name="dayFilter" value="ALL" checked> ALL</label>
-        <label><input type="radio" name="dayFilter" value="TODAY"> TODAY</label>
-        <label><input type="radio" name="dayFilter" value="MO-FR"> MO-FR</label>
-        <label><input type="radio" name="dayFilter" value="SAT"> SAT</label>
-        <label><input type="radio" name="dayFilter" value="SUN"> SUN</label>
-    </div>
 
     <table id="scheduleTable" border="0" style="color: aliceblue; margin: 0 auto;">
         <thead style="height: 50px;">
@@ -39,9 +31,31 @@
 
 
 
-    <div style="margin-top: 5%; text-transform: uppercase; font-weight: bold;">
+    <div style="margin-top: auto; margin-bottom: 10px; text-transform: uppercase; font-weight: bold;">
+        <div class="filter" style="color: aliceblue; margin-bottom: 10px;">
+            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
+                <input type="radio" name="dayFilter" style="display: none;" value="TODAY" checked>
+                TODAY
+            </label>
+            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
+                <input type="radio" name="dayFilter" style="display: none;" value="ALL">
+                ALL
+            </label>
+            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
+                <input type="radio" name="dayFilter" style="display: none;" value="MO-FR">
+                MO-FR
+            </label>
+            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
+                <input type="radio" name="dayFilter" style="display: none;" value="SAT">
+                SAT
+            </label>
+            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
+                <input type="radio" name="dayFilter" style="display: none;" value="SUN">
+                SUN
+            </label>
+        </div>
         <p>
-            <a href="https://bookings.burkesbus.ie/" target="_blank" style="color: aliceblue; ">Buy the ticket here</a>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" style="color: rgb(139, 201, 255); text-decoration: none; line-height: 28px; background-color: aliceblue; border-radius: 5px; padding: 4px;">Buy the ticket here</a>
         </p>
     </div>
 
