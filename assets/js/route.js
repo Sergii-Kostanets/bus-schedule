@@ -23,6 +23,9 @@ console.log('Departure: ', departure)
 arrival = getQueryParams().arrival;
 console.log('Arrival:   ', arrival)
 
+document.getElementById('departureHeader').textContent = departure;
+document.getElementById('arrivalHeader').textContent = arrival;
+
 // Update the fetchSchedule function to accept a custom range
 function fetchSchedule(route, departure, arrival) {
     const range = `${route}!A1:Z100`; // Adjust the range according to your data
@@ -88,7 +91,7 @@ function displaySchedule(data) {
         departureTd.textContent = row.departureTime;
         arrivalTd.textContent = row.arrivalTime;
 
-        tr.appendChild(dayTd);
+        // tr.appendChild(dayTd);
         tr.appendChild(departureTd);
         tr.appendChild(arrivalTd);
         tableBody.appendChild(tr);

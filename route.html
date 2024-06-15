@@ -16,12 +16,20 @@
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
 
-    <table id="scheduleTable" border="0" style="color: aliceblue; margin: 0 auto 10px; height: 300px; overflow: scroll;">
+    <table id="scheduleTable" border="0" style="color: aliceblue; margin: 0 auto 10px;">
         <thead style="height: 50px;">
             <tr>
-                <th style="width: 100px;">Day</th>
-                <th style="width: 150px;">Departure Time</th>
-                <th style="width: 100px;">Arrival Time</th>
+                <!-- <th style="width: 100px;">Day</th> -->
+                <th style="width: 150px;">
+                    <span>Departure Time</span>
+                    <br>
+                    <span id="departureHeader"></span>
+                </th>
+                <th style="width: 100px;">
+                    <span>Arrival Time</span>
+                    <br>
+                    <span id="arrivalHeader"></span>
+                </th>
             </tr>
         </thead>
         <tbody>
