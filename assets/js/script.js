@@ -3,7 +3,7 @@ const ClaregalwayGalway = [
   { day: 'M-F', time: '07:25' },
   { day: 'M-F', time: '07:45' },
   { day: 'M-F', time: '07:55' },
-  { day: 'M-F', time: '08:01' },
+  { day: 'M-F', time: '08:10' },
   { day: 'M-F', time: '08:15' },
   { day: 'Sa', time: '08:15' },
   { day: 'M-F*', time: '08:20' },
