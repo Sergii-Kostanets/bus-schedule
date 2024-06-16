@@ -24,15 +24,20 @@
             <!-- <option value="435">435</option> -->
         </select>
         <br>
-        <label for="departure-select" style="color: beige;">Departure:</label><br>
-        <select id="departure-select" name="departure" disabled>
-            <!-- Options will be dynamically populated -->
-        </select>
-        <br>
-        <label for="arrival-select" style="color: bisque;">Arrival:</label><br>
-        <select id="arrival-select" name="arrival" disabled>
-            <!-- Options will be dynamically populated -->
-        </select>
+        <div style="display: flex; justify-content: space-around; margin: 20px auto;">
+            <div>
+                <label for="departure-select" style="color: beige;">Departure:</label><br>
+                <select id="departure-select" style="height: 30px; border-radius: 5px;" name="departure" disabled>
+                    <!-- Options will be dynamically populated -->
+                </select>
+            </div>
+            <div>
+                <label for="arrival-select" style="color: bisque;">Arrival:</label><br>
+                <select id="arrival-select" style="height: 30px; border-radius: 5px;" name="arrival" disabled>
+                    <!-- Options will be dynamically populated -->
+                </select>
+            </div>
+        </div>
         <br>
         <button type="submit" style="margin-top: 30px; height: 30px; width: 100px; border-radius: 5px; color: black; background-color: blanchedalmond; text-transform: uppercase; font-weight: bold;">Submit</button>
         <br>

@@ -75,6 +75,9 @@ function populateOptions(routeValue) {
 
                 // Enable the departure select
                 departureSelect.disabled = false;
+
+                // Trigger the change event for the departure select to populate the arrival select
+                departureSelect.dispatchEvent(new Event('change'));
             })
             .catch(error => console.error('Error fetching data: ', error));
     }
