@@ -93,11 +93,25 @@ function populateOptions(routeValue) {
     }
 }
 
+// Function to apply the checked class to the selected label
+function applyCheckedClass() {
+    const routeRadios = document.querySelectorAll('input[name="route"]');
+    routeRadios.forEach(radio => {
+        const label = radio.parentNode;
+        if (radio.checked) {
+            label.classList.add('checked');
+        } else {
+            label.classList.remove('checked');
+        }
+    });
+}
+
 // Event listener for route radio buttons change
 document.querySelectorAll('input[name="route"]').forEach(radio => {
     radio.addEventListener('change', function() {
         const routeValue = this.value;
         populateOptions(routeValue);
+        applyCheckedClass();
     });
 });
 
@@ -123,3 +137,4 @@ document.getElementById('schedule-form').addEventListener('submit', function(eve
 // Initial population of options based on the default route
 const defaultRoute = document.querySelector('input[name="route"]:checked').value;
 populateOptions(defaultRoute);
+applyCheckedClass();

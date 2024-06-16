@@ -43,7 +43,7 @@ body {
 
 fieldset > legend,
 fieldset > label {
-    line-height: 28px;
+    line-height: 36px;
 }
 
 fieldset > label > input {
@@ -71,6 +71,9 @@ fieldset > label > input {
 
 .checked {
     color: #555;
+    background-color: #dbdbdb;
+    padding: 6px 8px;
+    border-radius: 5px;
 }
 
 #combined-schedule {
