@@ -20,58 +20,68 @@ function populateOptions(routeValue) {
     arrivalSelect.disabled = true;
 
     // Determine the range based on the selected route
-    let departureRange, arrivalRange;
+    let range;
     if (routeValue === '427-Galway->Tuam') {
-        departureRange = '427-Galway->Tuam!B1:J1';
-        arrivalRange = '427-Galway->Tuam!B1:J1';
+        range = '427-Galway->Tuam!B1:J1';
     } else if (routeValue === '427-Tuam->Galway') {
-        departureRange = '427-Tuam->Galway!B1:K1';
-        arrivalRange = '427-Tuam->Galway!B1:K1';
+        range = '427-Tuam->Galway!B1:K1';
     } else if (routeValue === '435') {
         console.log('No schedule for 435 yet');
     } else {
         console.log('Invalid route selected');
     }
 
-    // Form the URLs for fetching data
-    let urlDeparture = null;
-    if (departureRange) {
-        urlDeparture = formUrl(sheetId, apiKey, departureRange);
-    }
-    let urlArrival = null;
-    if (arrivalRange) {
-        urlArrival = formUrl(sheetId, apiKey, arrivalRange);
+    // Form the URL for fetching data
+    let url = null;
+    if (range) {
+        url = formUrl(sheetId, apiKey, range);
     }
 
     // Function to fetch and display schedule options
-    function showSchedule(url, elementId, selectedOption) {
+    function showSchedule(url, departureSelect, arrivalSelect) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                const element = document.getElementById(elementId);
-                let i = 0;
-                data.values[0].forEach(option => {
-                    i++;
+                let stops = data.values[0];
+
+                // Populate the departure dropdown
+                stops.forEach(stop => {
                     const optionElement = document.createElement('option');
-                    optionElement.value = option;
-                    optionElement.textContent = option;
-                    if (i === selectedOption) {
-                        optionElement.selected = true;
-                    }
-                    element.appendChild(optionElement);
+                    optionElement.value = stop;
+                    optionElement.textContent = stop;
+                    departureSelect.appendChild(optionElement);
                 });
+
+                // Add event listener to departure dropdown
+                departureSelect.addEventListener('change', function() {
+                    // Clear existing options in arrival dropdown
+                    arrivalSelect.innerHTML = '';
+
+                    // Get the selected departure stop
+                    const selectedDeparture = departureSelect.value;
+                    const selectedDepartureIndex = stops.indexOf(selectedDeparture);
+
+                    // Populate the arrival dropdown with stops after the selected departure
+                    for (let i = selectedDepartureIndex + 1; i < stops.length; i++) {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = stops[i];
+                        optionElement.textContent = stops[i];
+                        arrivalSelect.appendChild(optionElement);
+                    }
+
+                    // Enable the arrival select
+                    arrivalSelect.disabled = false;
+                });
+
+                // Enable the departure select
+                departureSelect.disabled = false;
             })
             .catch(error => console.error('Error fetching data: ', error));
     }
 
     // Populate the dropdowns with the fetched data
-    if (urlDeparture && routeValue !== '435') {
-        showSchedule(urlDeparture, 'departure-select', 2);
-        departureSelect.disabled = false;
-    }
-    if (urlArrival && routeValue !== '435') {
-        showSchedule(urlArrival, 'arrival-select', 8);
-        arrivalSelect.disabled = false;
+    if (url && routeValue !== '435') {
+        showSchedule(url, departureSelect, arrivalSelect);
     }
 }
 
