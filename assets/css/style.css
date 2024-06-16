@@ -41,6 +41,15 @@ body {
     outline: none;
 }
 
+fieldset > legend,
+fieldset > label {
+    line-height: 28px;
+}
+
+fieldset > label > input {
+    display: none;
+}
+
 #schedule-form > label {
     display: block;
 }

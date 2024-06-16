@@ -17,12 +17,23 @@
     </a>
 
     <form id="schedule-form">
-        <label for="route-select" style="color: rgb(255, 255, 255);">Route:</label>
-        <select id="route-select" name="route">
-            <option value="427-Galway->Tuam">427 Galway - Tuam/Dunmore</option>
-            <option value="427-Tuam->Galway">427 Tuam/Dunmore - Galway</option>
-            <!-- <option value="435">435</option> -->
-        </select>
+        <!-- Replace route dropdown with radio buttons -->
+        <fieldset style="border: none; color: white;">
+            <legend>Choose Route:</legend>
+            <label>
+                <input type="radio" name="route" value="427-Galway->Tuam" checked>
+                427 Galway - Tuam/Dunmore
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="route" value="427-Tuam->Galway">
+                427 Tuam/Dunmore - Galway
+            </label>
+            <!-- <label>
+                <input type="radio" name="route" value="435">
+                435
+            </label> -->
+        </fieldset>
         <br>
         <div style="display: flex; justify-content: center; margin: 20px 0;">
             <div style="margin: 0 10px;">

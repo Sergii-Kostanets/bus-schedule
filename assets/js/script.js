@@ -93,10 +93,12 @@ function populateOptions(routeValue) {
     }
 }
 
-// Event listener for route select change
-document.getElementById('route-select').addEventListener('change', function() {
-    const routeValue = this.value;
-    populateOptions(routeValue);
+// Event listener for route radio buttons change
+document.querySelectorAll('input[name="route"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const routeValue = this.value;
+        populateOptions(routeValue);
+    });
 });
 
 // Event listener for form submit
@@ -119,5 +121,5 @@ document.getElementById('schedule-form').addEventListener('submit', function(eve
 });
 
 // Initial population of options based on the default route
-const defaultRoute = document.getElementById('route-select').value;
+const defaultRoute = document.querySelector('input[name="route"]:checked').value;
 populateOptions(defaultRoute);
