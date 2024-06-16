@@ -17,21 +17,21 @@
     </a>
 
     <form id="schedule-form">
-        <!-- <label for="route-select">Choose Route:</label> -->
+        <label for="route-select" style="color: rgb(255, 255, 255);">Route:</label>
         <select id="route-select" name="route">
             <option value="427-Galway->Tuam">427 Galway - Tuam/Dunmore</option>
             <option value="427-Tuam->Galway">427 Tuam/Dunmore - Galway</option>
             <!-- <option value="435">435</option> -->
         </select>
         <br>
-        <div style="display: flex; justify-content: space-around; margin: 20px auto;">
-            <div>
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
+            <div style="margin: 0 10px;">
                 <label for="departure-select" style="color: beige;">Departure:</label><br>
                 <select id="departure-select" style="height: 30px; border-radius: 5px;" name="departure" disabled>
                     <!-- Options will be dynamically populated -->
                 </select>
             </div>
-            <div>
+            <div style="margin: 0 10px;">
                 <label for="arrival-select" style="color: bisque;">Arrival:</label><br>
                 <select id="arrival-select" style="height: 30px; border-radius: 5px;" name="arrival" disabled>
                     <!-- Options will be dynamically populated -->
@@ -39,7 +39,7 @@
             </div>
         </div>
         <br>
-        <button type="submit" style="margin-top: 30px; height: 30px; width: 100px; border-radius: 5px; color: black; background-color: blanchedalmond; text-transform: uppercase; font-weight: bold;">Submit</button>
+        <button type="submit" style="height: 30px; width: 100px; border-radius: 5px; color: black; background-color: blanchedalmond; text-transform: uppercase; font-weight: bold;">Submit</button>
         <br>
     </form>
 
