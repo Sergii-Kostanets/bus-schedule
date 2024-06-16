@@ -20,11 +20,13 @@ function populateOptions(routeValue) {
     arrivalSelect.disabled = true;
 
     // Determine the range based on the selected route
-    let range;
+    let range, defaultDeparture;
     if (routeValue === '427-Galway->Tuam') {
         range = '427-Galway->Tuam!B1:J1';
+        defaultDeparture = 'Galway City';
     } else if (routeValue === '427-Tuam->Galway') {
         range = '427-Tuam->Galway!B1:K1';
+        defaultDeparture = 'Tuam';
     } else if (routeValue === '435') {
         console.log('No schedule for 435 yet');
     } else {
@@ -38,7 +40,7 @@ function populateOptions(routeValue) {
     }
 
     // Function to fetch and display schedule options
-    function showSchedule(url, departureSelect, arrivalSelect) {
+    function showSchedule(url, departureSelect, arrivalSelect, defaultDeparture) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -49,6 +51,9 @@ function populateOptions(routeValue) {
                     const optionElement = document.createElement('option');
                     optionElement.value = stop;
                     optionElement.textContent = stop;
+                    if (stop === defaultDeparture) {
+                        optionElement.selected = true;
+                    }
                     departureSelect.appendChild(optionElement);
                 });
 
@@ -84,7 +89,7 @@ function populateOptions(routeValue) {
 
     // Populate the dropdowns with the fetched data
     if (url && routeValue !== '435') {
-        showSchedule(url, departureSelect, arrivalSelect);
+        showSchedule(url, departureSelect, arrivalSelect, defaultDeparture);
     }
 }
 
