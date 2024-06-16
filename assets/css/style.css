@@ -6,7 +6,8 @@
     box-sizing: border-box;
 }
 body {
-    background-image: url(/assets/img/burkesbus.jpg);
+    /* background-image: url(/assets/img/burkesbus.jpg); */
+    background-color: #1b1b1b;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
