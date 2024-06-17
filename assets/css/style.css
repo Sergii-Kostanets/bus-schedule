@@ -77,6 +77,14 @@ fieldset > label > input {
     border-radius: 5px;
 }
 
+fieldset > label:hover {
+    color: #555;
+    background-color: #a7a7a7;
+    padding: 6px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 #combined-schedule {
     margin-top: 20px;
     margin-bottom: 20px;
