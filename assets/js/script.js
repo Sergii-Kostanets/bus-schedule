@@ -123,9 +123,9 @@ document.getElementById('schedule-form').addEventListener('submit', function(eve
     const selectedDeparture = formData.get('departure');
     const selectedArrival = formData.get('arrival');
 
-    console.log('Selected Route:', selectedRoute);
-    console.log('Selected Departure:', selectedDeparture);
-    console.log('Selected Arrival:', selectedArrival);
+    // console.log('Selected Route:', selectedRoute);
+    // console.log('Selected Departure:', selectedDeparture);
+    // console.log('Selected Arrival:', selectedArrival);
 
     // Construct the new URL with query parameters
     const newUrl = `/route.html?route=${encodeURIComponent(selectedRoute)}&departure=${encodeURIComponent(selectedDeparture)}&arrival=${encodeURIComponent(selectedArrival)}`;

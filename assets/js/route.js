@@ -17,11 +17,11 @@ function getQueryParams() {
 }
 
 route = getQueryParams().route;
-console.log('Route:     ', route)
+// console.log('Route:     ', route)
 departure = getQueryParams().departure;
-console.log('Departure: ', departure)
+// console.log('Departure: ', departure)
 arrival = getQueryParams().arrival;
-console.log('Arrival:   ', arrival)
+// console.log('Arrival:   ', arrival)
 
 document.getElementById('departureHeader').textContent = departure;
 document.getElementById('arrivalHeader').textContent = arrival;
@@ -55,14 +55,14 @@ function fetchSchedule(route, departure, arrival) {
             return [];}
     );
 }
-fetchSchedule(route, departure, arrival).then(data => console.log(data));
+// fetchSchedule(route, departure, arrival).then(data => console.log('Filtered schedule: ', data));
 
-let fetchedSchedule = fetchSchedule(route, departure, arrival);
-console.log('fetchedSchedule: ', fetchedSchedule);
+// let fetchedSchedule = fetchSchedule(route, departure, arrival);
+// console.log('fetchedSchedule: ', fetchedSchedule);
 
 function filterSchedule(data, filter) {
     const today = new Date().toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
-    console.log('Today: ', today);
+    // console.log('Today: ', today);
 
     return data.filter(row => {
         if (filter === 'TODAY') {
@@ -83,11 +83,11 @@ function displaySchedule(data) {
 
     data.forEach(row => {
         const tr = document.createElement('tr');
-        const dayTd = document.createElement('td');
+        // const dayTd = document.createElement('td');
         const departureTd = document.createElement('td');
         const arrivalTd = document.createElement('td');
 
-        dayTd.textContent = row.day;
+        // dayTd.textContent = row.day;
         departureTd.textContent = row.departureTime;
         arrivalTd.textContent = row.arrivalTime;
 
