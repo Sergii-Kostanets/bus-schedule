@@ -24,9 +24,11 @@ function populateOptions(routeValue) {
     if (routeValue === '427-Galway->Tuam') {
         range = '427-Galway->Tuam!B1:J1';
         defaultDeparture = 'Galway City';
+        defaultArrival = 'Tuam';
     } else if (routeValue === '427-Tuam->Galway') {
         range = '427-Tuam->Galway!B1:K1';
         defaultDeparture = 'Tuam';
+        defaultArrival = 'Galway City';
     } else if (routeValue === '435') {
         console.log('No schedule for 435 yet');
     } else {
@@ -40,7 +42,7 @@ function populateOptions(routeValue) {
     }
 
     // Function to fetch and display schedule options
-    function showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture) {
+    function showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture, defaultArrival) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -49,7 +51,9 @@ function populateOptions(routeValue) {
                 // Populate the departure fieldset
                 stops.forEach(stop => {
                     const labelElement = document.createElement('label');
-                    labelElement.style.color = 'white';
+                    if (stop === defaultDeparture) {
+                        labelElement.classList.add('checked');
+                    }
                     labelElement.innerHTML = `
                         <input type="radio" name="departure" value="${stop}" ${stop === defaultDeparture ? 'checked' : ''}>
                         ${stop}
@@ -70,9 +74,11 @@ function populateOptions(routeValue) {
                     // Populate the arrival fieldset with stops after the selected departure
                     for (let i = selectedDepartureIndex + 1; i < stops.length; i++) {
                         const labelElement = document.createElement('label');
-                        labelElement.style.color = 'white';
+                        if (stops[i] === defaultArrival) {
+                            labelElement.classList.add('checked');
+                        }
                         labelElement.innerHTML = `
-                            <input type="radio" name="arrival" value="${stops[i]}">
+                            <input type="radio" name="arrival" value="${stops[i]}" ${stops[i] === defaultArrival ? 'checked' : ''}>
                             ${stops[i]}
                         `;
                         arrivalFieldset.appendChild(labelElement);
@@ -81,6 +87,34 @@ function populateOptions(routeValue) {
 
                     // Enable the arrival fieldset
                     arrivalFieldset.disabled = false;
+
+                    // Add checked class to departure radio buttons
+                    document.querySelectorAll('input[name="departure"]').forEach(radio => {
+                        radio.addEventListener('change', function() {
+                            document.querySelectorAll('input[name="departure"]').forEach(radio => {
+                                const label = radio.parentNode;
+                                if (radio.checked) {
+                                    label.classList.add('checked');
+                                } else {
+                                    label.classList.remove('checked');
+                                }
+                            });
+                        });
+                        // Add checked class to arrival radio buttons
+                        // Add event listeners to arrival radio buttons
+                        document.querySelectorAll('input[name="arrival"]').forEach(radio => {
+                            radio.addEventListener('change', function() {
+                                document.querySelectorAll('input[name="arrival"]').forEach(radio => {
+                                    const label = radio.parentNode;
+                                    if (radio.checked) {
+                                        label.classList.add('checked');
+                                    } else {
+                                        label.classList.remove('checked');
+                                    }
+                                });
+                            });
+                        });
+                    });
                 });
 
                 // Enable the departure fieldset
@@ -95,7 +129,7 @@ function populateOptions(routeValue) {
 
     // Populate the radio buttons with the fetched data
     if (url && routeValue !== '435') {
-        showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture);
+        showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture, defaultArrival);
     }
 }
 
