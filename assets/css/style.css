@@ -46,7 +46,17 @@ fieldset > legend,
 fieldset > label {
     line-height: 36px;
 }
-
+fieldset > label {
+    line-height: 36px;
+    background-color: #464646;
+    color: #aaaaaa;
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+#departure-fieldset,
+#arrival-fieldset {
+    width: 150px;
+}
 fieldset > label > input {
     display: none;
 }

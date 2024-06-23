@@ -11,7 +11,6 @@
     <link rel="manifest" href="/assets/img/site.webmanifest">
 </head>
 <body>
-    <!-- <div class="overlay"></div> -->
     <a href="/">
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
@@ -29,27 +28,17 @@
                 <input type="radio" name="route" value="427-Tuam->Galway">
                 427 Tuam/Dunmore - Galway
             </label>
-            <!-- <label>
-                <input type="radio" name="route" value="435">
-                435
-            </label> -->
         </fieldset>
-        <br>
-        <div style="display: flex; justify-content: center; margin-bottom: 15px;">
-            <div style="margin: 0 10px;">
-                <label for="departure-select" style="color: beige;">Departure:</label><br>
-                <select id="departure-select" style="height: 30px; border-radius: 5px;" name="departure" disabled>
-                    <!-- Options will be dynamically populated -->
-                </select>
-            </div>
-            <div style="margin: 0 10px;">
-                <label for="arrival-select" style="color: bisque;">Arrival:</label><br>
-                <select id="arrival-select" style="height: 30px; border-radius: 5px;" name="arrival" disabled>
-                    <!-- Options will be dynamically populated -->
-                </select>
-            </div>
+        <div style="display: flex; justify-content: center;">
+            <fieldset id="departure-fieldset" style="border: none; color: beige; margin: 0 10px 20px;">
+                <legend>Departure:</legend>
+                <!-- Radio buttons for departure will be dynamically populated -->
+            </fieldset>
+            <fieldset id="arrival-fieldset" style="border: none; color: bisque; margin: 0 10px 20px;" disabled>
+                <legend>Arrival:</legend>
+                <!-- Radio buttons for arrival will be dynamically populated -->
+            </fieldset>
         </div>
-        <br>
         <button type="submit" style="height: 30px; width: 100px; border-radius: 5px; color: black; background-color: blanchedalmond; text-transform: uppercase; font-weight: bold;">Schedule</button>
         <br>
     </form>

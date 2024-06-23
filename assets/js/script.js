@@ -6,18 +6,18 @@ function formUrl(sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
 
-// Function to populate the dropdown options based on the selected route
+// Function to populate the radio buttons based on the selected route
 function populateOptions(routeValue) {
-    const departureSelect = document.getElementById('departure-select');
-    const arrivalSelect = document.getElementById('arrival-select');
+    const departureFieldset = document.getElementById('departure-fieldset');
+    const arrivalFieldset = document.getElementById('arrival-fieldset');
 
-    // Clear existing options
-    departureSelect.innerHTML = '';
-    arrivalSelect.innerHTML = '';
+    // Clear existing radio buttons
+    departureFieldset.innerHTML = '<legend>Departure:</legend>';
+    arrivalFieldset.innerHTML = '<legend>Arrival:</legend>';
 
-    // Disable the selects initially
-    departureSelect.disabled = true;
-    arrivalSelect.disabled = true;
+    // Disable the fieldsets initially
+    departureFieldset.disabled = true;
+    arrivalFieldset.disabled = true;
 
     // Determine the range based on the selected route
     let range, defaultDeparture;
@@ -40,56 +40,63 @@ function populateOptions(routeValue) {
     }
 
     // Function to fetch and display schedule options
-    function showSchedule(url, departureSelect, arrivalSelect, defaultDeparture) {
+    function showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 let stops = data.values[0];
 
-                // Populate the departure dropdown
+                // Populate the departure fieldset
                 stops.forEach(stop => {
-                    const optionElement = document.createElement('option');
-                    optionElement.value = stop;
-                    optionElement.textContent = stop;
-                    if (stop === defaultDeparture) {
-                        optionElement.selected = true;
-                    }
-                    departureSelect.appendChild(optionElement);
+                    const labelElement = document.createElement('label');
+                    labelElement.style.color = 'white';
+                    labelElement.innerHTML = `
+                        <input type="radio" name="departure" value="${stop}" ${stop === defaultDeparture ? 'checked' : ''}>
+                        ${stop}
+                    `;
+                    departureFieldset.appendChild(labelElement);
+                    departureFieldset.appendChild(document.createElement('br'));
                 });
 
-                // Add event listener to departure dropdown
-                departureSelect.addEventListener('change', function() {
-                    // Clear existing options in arrival dropdown
-                    arrivalSelect.innerHTML = '';
+                // Add event listener to departure radio buttons
+                departureFieldset.addEventListener('change', function() {
+                    // Clear existing radio buttons in arrival fieldset
+                    arrivalFieldset.innerHTML = '<legend>Arrival:</legend>';
 
                     // Get the selected departure stop
-                    const selectedDeparture = departureSelect.value;
+                    const selectedDeparture = document.querySelector('input[name="departure"]:checked').value;
                     const selectedDepartureIndex = stops.indexOf(selectedDeparture);
 
-                    // Populate the arrival dropdown with stops after the selected departure
+                    // Populate the arrival fieldset with stops after the selected departure
                     for (let i = selectedDepartureIndex + 1; i < stops.length; i++) {
-                        const optionElement = document.createElement('option');
-                        optionElement.value = stops[i];
-                        optionElement.textContent = stops[i];
-                        arrivalSelect.appendChild(optionElement);
+                        const labelElement = document.createElement('label');
+                        labelElement.style.color = 'white';
+                        labelElement.innerHTML = `
+                            <input type="radio" name="arrival" value="${stops[i]}">
+                            ${stops[i]}
+                        `;
+                        arrivalFieldset.appendChild(labelElement);
+                        arrivalFieldset.appendChild(document.createElement('br'));
                     }
 
-                    // Enable the arrival select
-                    arrivalSelect.disabled = false;
+                    // Enable the arrival fieldset
+                    arrivalFieldset.disabled = false;
+                    console.log('Departure stop selected: ', selectedDeparture);
                 });
 
-                // Enable the departure select
-                departureSelect.disabled = false;
+                // Enable the departure fieldset
+                departureFieldset.disabled = false;
 
-                // Trigger the change event for the departure select to populate the arrival select
-                departureSelect.dispatchEvent(new Event('change'));
+                // Trigger the change event for the departure fieldset to populate the arrival fieldset
+                const event = new Event('change');
+                departureFieldset.dispatchEvent(event);
             })
             .catch(error => console.error('Error fetching data: ', error));
     }
 
-    // Populate the dropdowns with the fetched data
+    // Populate the radio buttons with the fetched data
     if (url && routeValue !== '435') {
-        showSchedule(url, departureSelect, arrivalSelect, defaultDeparture);
+        showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture);
     }
 }
 
@@ -122,10 +129,6 @@ document.getElementById('schedule-form').addEventListener('submit', function(eve
     const selectedRoute = formData.get('route');
     const selectedDeparture = formData.get('departure');
     const selectedArrival = formData.get('arrival');
-
-    // console.log('Selected Route:', selectedRoute);
-    // console.log('Selected Departure:', selectedDeparture);
-    // console.log('Selected Arrival:', selectedArrival);
 
     // Construct the new URL with query parameters
     const newUrl = `/route.html?route=${encodeURIComponent(selectedRoute)}&departure=${encodeURIComponent(selectedDeparture)}&arrival=${encodeURIComponent(selectedArrival)}`;
