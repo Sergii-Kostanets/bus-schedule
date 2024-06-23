@@ -81,7 +81,6 @@ function populateOptions(routeValue) {
 
                     // Enable the arrival fieldset
                     arrivalFieldset.disabled = false;
-                    console.log('Departure stop selected: ', selectedDeparture);
                 });
 
                 // Enable the departure fieldset
