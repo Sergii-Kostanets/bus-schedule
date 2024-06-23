@@ -16,16 +16,15 @@
         <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
     </a>
 
-    <table id="scheduleTable" border="0" style="color: aliceblue; margin: 0 auto 10px;">
-        <thead style="height: 50px;">
+    <table id="scheduleTable" class="table-container">
+        <thead>
             <tr>
-                <!-- <th style="width: 100px;">Day</th> -->
-                <th style="width: 120px;">
+                <th>
                     <span>Departure</span>
                     <br>
                     <span id="departureHeader"></span>
                 </th>
-                <th style="width: 120px;">
+                <th>
                     <span>Arrival</span>
                     <br>
                     <span id="arrivalHeader"></span>
@@ -37,34 +36,34 @@
         </tbody>
     </table>
 
-    <div style="margin-top: auto; margin-bottom: 20px; text-transform: uppercase; font-weight: bold;">
-        <div class="filter" style="color: aliceblue; margin-bottom: 10px;">
-            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
-                <input type="radio" name="dayFilter" style="display: none;" value="TODAY" checked>
+    <div class="footer">
+        <div class="filter">
+            <label>
+                <input type="radio" name="dayFilter" value="TODAY" checked>
                 TODAY
             </label>
-            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
-                <input type="radio" name="dayFilter" style="display: none;" value="ALL">
+            <label>
+                <input type="radio" name="dayFilter" value="ALL">
                 ALL
             </label>
-            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
-                <input type="radio" name="dayFilter" style="display: none;" value="MO-FR">
+            <label>
+                <input type="radio" name="dayFilter" value="MO-FR">
                 MO-FR
             </label>
-            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
-                <input type="radio" name="dayFilter" style="display: none;" value="SAT">
+            <label>
+                <input type="radio" name="dayFilter" value="SAT">
                 SAT
             </label>
-            <label style="margin: 0 5px; background-color: rgb(116, 116, 116); border-radius: 5px; padding: 4px;">
-                <input type="radio" name="dayFilter" style="display: none;" value="SUN">
+            <label>
+                <input type="radio" name="dayFilter" value="SUN">
                 SUN
             </label>
         </div>
-        <p style="margin-bottom: 5px;">
-            <a href="https://bookings.burkesbus.ie/" target="_blank" style="color: rgb(139, 201, 255); text-decoration: none; line-height: 28px; background-color: aliceblue; border-radius: 5px; padding: 5px 8px;">Buy the ticket here</a>
+        <p>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Buy the ticket here</a>
         </p>
         <p>
-            <a href="/galway-claregalway.html" style="color: rgb(255, 255, 255); text-decoration: none; line-height: 28px; background-color: rgb(0, 0, 0); border-radius: 5px; padding: 5px 8px;">Old Version</a>
+            <a href="/galway-claregalway.html" class="old-version">Old Version</a>
         </p>
     </div>
 

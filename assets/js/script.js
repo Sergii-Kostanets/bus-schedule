@@ -14,7 +14,7 @@ function populateOptions(routeValue) {
     // Clear existing radio buttons
     departureFieldset.innerHTML = '<legend>Departure:</legend>';
     arrivalFieldset.innerHTML = '<legend>Arrival:</legend>';
-
+    
     // Disable the fieldsets initially
     departureFieldset.disabled = true;
     arrivalFieldset.disabled = true;
