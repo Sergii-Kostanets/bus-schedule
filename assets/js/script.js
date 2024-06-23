@@ -6,6 +6,18 @@ function formUrl(sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
 
+// Function to show the loading overlay
+function showLoadingOverlay() {
+    document.getElementById('loading-overlay').style.display = 'flex';
+    document.getElementById('schedule-form').style.display = 'none';
+}
+
+// Function to hide the loading overlay
+function hideLoadingOverlay() {
+    document.getElementById('loading-overlay').style.display = 'none';
+    document.getElementById('schedule-form').style.display = 'block';
+}
+
 // Function to populate the radio buttons based on the selected route
 function populateOptions(routeValue) {
     const departureFieldset = document.getElementById('departure-fieldset');
@@ -14,6 +26,9 @@ function populateOptions(routeValue) {
     // Clear existing radio buttons
     departureFieldset.innerHTML = '<legend>Departure:</legend>';
     arrivalFieldset.innerHTML = '<legend>Arrival:</legend>';
+
+    // Show the loading overlay
+    showLoadingOverlay();
     
     // Disable the fieldsets initially
     departureFieldset.disabled = true;
@@ -101,7 +116,6 @@ function populateOptions(routeValue) {
                             });
                         });
                         // Add checked class to arrival radio buttons
-                        // Add event listeners to arrival radio buttons
                         document.querySelectorAll('input[name="arrival"]').forEach(radio => {
                             radio.addEventListener('change', function() {
                                 document.querySelectorAll('input[name="arrival"]').forEach(radio => {
@@ -124,7 +138,11 @@ function populateOptions(routeValue) {
                 const event = new Event('change');
                 departureFieldset.dispatchEvent(event);
             })
-            .catch(error => console.error('Error fetching data: ', error));
+            .catch(error => console.error('Error fetching data: ', error))
+            .finally(() => {
+                // Hide the loading overlay
+                hideLoadingOverlay();
+            });
     }
 
     // Populate the radio buttons with the fetched data

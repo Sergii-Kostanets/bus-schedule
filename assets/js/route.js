@@ -6,6 +6,16 @@ function formUrl(sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
 
+// Function to show the loading overlay
+function showLoadingOverlay() {
+    document.getElementById('loading-overlay').style.display = 'flex';
+}
+
+// Function to hide the loading overlay
+function hideLoadingOverlay() {
+    document.getElementById('loading-overlay').style.display = 'none';
+}
+
 // Function to get query parameters from the URL
 function getQueryParams() {
     const params = new URLSearchParams(window.location.search);
@@ -17,11 +27,8 @@ function getQueryParams() {
 }
 
 route = getQueryParams().route;
-// console.log('Route:     ', route)
 departure = getQueryParams().departure;
-// console.log('Departure: ', departure)
 arrival = getQueryParams().arrival;
-// console.log('Arrival:   ', arrival)
 
 document.getElementById('departureHeader').textContent = departure;
 document.getElementById('arrivalHeader').textContent = arrival;
@@ -30,6 +37,9 @@ document.getElementById('arrivalHeader').textContent = arrival;
 function fetchSchedule(route, departure, arrival) {
     const range = `${route}!A1:Z100`; // Adjust the range according to your data
     const url = formUrl(sheetId, apiKey, range);
+
+    // Show the loading overlay
+    showLoadingOverlay();
 
     return fetch(url)
         .then(response => response.json())
@@ -42,7 +52,6 @@ function fetchSchedule(route, departure, arrival) {
             if (departureIndex === -1 || arrivalIndex === -1) {
                 throw new Error('Departure or Arrival location not found in the headers.');
             }
-
             // Extract relevant columns
             return data.values.slice(1)  // Skip the header row
                 .map(row => ({
@@ -53,16 +62,15 @@ function fetchSchedule(route, departure, arrival) {
         })
         .catch(error => {console.error('Error fetching data: ', error);
             return [];}
-    );
+        )
+        .finally(() => {
+            // Hide the loading overlay
+            hideLoadingOverlay();
+        });
 }
-// fetchSchedule(route, departure, arrival).then(data => console.log('Filtered schedule: ', data));
-
-// let fetchedSchedule = fetchSchedule(route, departure, arrival);
-// console.log('fetchedSchedule: ', fetchedSchedule);
 
 function filterSchedule(data, filter) {
     const today = new Date().toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
-    // console.log('Today: ', today);
 
     return data.filter(row => {
         if (filter === 'TODAY') {
