@@ -1,185 +1,194 @@
-const ClaregalwayGalway = [
-  { day: 'M-F', time: '07:00' },
-  { day: 'M-F', time: '07:25' },
-  { day: 'M-F', time: '07:45' },
-  { day: 'M-F', time: '07:55' },
-  { day: 'M-F', time: '08:10' },
-  { day: 'M-F', time: '08:15' },
-  { day: 'Sa', time: '08:15' },
-  { day: 'M-F*', time: '08:20' },
-  { day: 'M-F', time: '08:55' },
-  { day: 'Sa', time: '08:55' },
-  { day: 'M-F', time: '09:30' },
-  { day: 'Sa', time: '09:30' },
-  { day: 'M-Sa', time: '10:25' },
-  { day: 'M-Su', time: '11:15' },
-  { day: 'M-F', time: '11:55' },
-  { day: 'M-Su', time: '12:25' },
-  { day: 'M-F', time: '13:35' },
-  { day: 'M-Su', time: '14:35' },
-  { day: 'M-Sa', time: '15:35' },
-  { day: 'M-Su', time: '16:35' },
-  { day: 'M-Su', time: '17:35' },
-  { day: 'M-F', time: '18:35' },
-  { day: 'M-Su', time: '19:35' },
-  { day: 'M-Sa', time: '20:35' }
-];
+const sheetId = "1774H66Bt1Gl9MT_YLxuFpbDZtzcPe4XQgjB1p9Eiovo";
+const apiKey = "AIzaSyD8XLZMEgRsPCeKzo5aZ0eSrN7XolPrJhQ";
 
-const GalwayClaregalway = [
-  { day: 'M-F', time: '08:00' },
-  { day: 'M-Sa', time: '09:05' },
-  { day: 'M-Sa', time: '09:35' },
-  { day: 'M-F', time: '10:05' },
-  { day: 'M-Sa', time: '10:50' },
-  { day: 'M-F', time: '12:10' },
-  { day: 'M-Su', time: '13:10' },
-  { day: 'M-F', time: '13:40' },
-  { day: 'M-Su', time: '14:10' },
-  { day: 'M-F', time: '15:00' },
-  { day: 'M-F', time: '15:30' },
-  { day: 'M-Su', time: '16:10' },
-  { day: 'M-F', time: '16:20' },
-  { day: 'M-F', time: '16:40' },
-  { day: 'M-Sa', time: '17:10' },
-  { day: 'M-F', time: '17:20' },
-  { day: 'M-Sa', time: '17:40' },
-  { day: 'Sun', time: '17:40' },
-  { day: 'M-F', time: '18:05' },
-  { day: 'M-Su', time: '18:20' },
-  { day: 'M-Sa', time: '19:10' },
-  { day: 'M-Sa', time: '20:10' },
-  { day: 'M-Su', time: '21:10' }
-];
-
-function ClaregalwayGalwaySchedule(day) {
-  let schedule = [];
-  if (day === 'Saturday') {
-    schedule = ClaregalwayGalway.filter(entry => entry.day === 'M-Sa' || entry.day === 'Sa' || entry.day === 'M-Su');
-  } else if (day === 'Sunday') {
-    schedule = ClaregalwayGalway.filter(entry => entry.day === 'M-Su' || entry.day === 'Sun');
-  } else {
-    schedule = ClaregalwayGalway.filter(entry => entry.day.includes('M-F') || entry.day === 'M-Sa' || entry.day === 'M-Su');
-  }
-  return schedule;
+// Function to construct the URL for the Google Sheets API
+function formUrl(sheetId, apiKey, range) {
+    return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
 }
 
-function GalwayClaregalwaySchedule(day) {
-  let schedule = [];
-  if (day === 'Saturday') {
-    schedule = GalwayClaregalway.filter(entry => entry.day === 'M-Sa' || entry.day === 'Sa' || entry.day === 'M-Su');
-  } else if (day === 'Sunday') {
-    schedule = GalwayClaregalway.filter(entry => entry.day === 'M-Su' || entry.day === 'Sun');
-  } else {
-    schedule = GalwayClaregalway.filter(entry => entry.day.includes('M-F') || entry.day === 'M-Sa' || entry.day === 'M-Su');
-  }
-  return schedule;
+// Function to show the loading overlay
+function showLoadingOverlay() {
+    document.getElementById('loading-overlay').style.display = 'flex';
+    document.getElementById('schedule-form').style.display = 'none';
 }
 
-function getCurrentTime() {
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-  return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+// Function to hide the loading overlay
+function hideLoadingOverlay() {
+    document.getElementById('loading-overlay').style.display = 'none';
+    document.getElementById('schedule-form').style.display = 'block';
 }
 
-function filterSchedule(schedule) {
-  const currentTime = getCurrentTime();
-  const filteredSchedule = schedule.filter(entry => {
-    const entryTime = entry.time.split(':');
-    const entryHours = parseInt(entryTime[0]);
-    const entryMinutes = parseInt(entryTime[1]);
-    const currentHours = parseInt(currentTime.split(':')[0]);
-    const currentMinutes = parseInt(currentTime.split(':')[1]);
+// Function to populate the radio buttons based on the selected route
+function populateOptions(routeValue) {
+    const departureFieldset = document.getElementById('departure-fieldset');
+    const arrivalFieldset = document.getElementById('arrival-fieldset');
 
-    if (entryHours < currentHours || (entryHours === currentHours && entryMinutes < currentMinutes)) {
-      return false;
-    }
-    return true;
-  });
-  return filteredSchedule;
-}
+    // Clear existing radio buttons
+    departureFieldset.innerHTML = '<legend>Departure:</legend>';
+    arrivalFieldset.innerHTML = '<legend>Arrival:</legend>';
 
-function updateSchedule() {
-    const selectedRadioButton = document.querySelector('input[name="dayOfTheWeek"]:checked');
-
-    // Remove the "checked" class from all radio button labels
-    document.querySelectorAll('.checked').forEach(label => {
-        label.classList.remove('checked');
-    });
-
-    // Add the "checked" class to the label of the currently selected radio button
-    selectedRadioButton.nextElementSibling.classList.add('checked');
-
-    const selectedDay = document.querySelector('input[name="dayOfTheWeek"]:checked').value;
+    // Show the loading overlay
+    showLoadingOverlay();
     
-    const galwaySchedule = ClaregalwayGalwaySchedule(selectedDay);
-    const claregalwaySchedule = GalwayClaregalwaySchedule(selectedDay);
-  
-    const galwayList = document.getElementById("claregalwayToGalway");
-    const claregalwayList = document.getElementById("galwayToClaregalway");
-  
-    galwayList.innerHTML = ""; // Clear previous list items
-    claregalwayList.innerHTML = ""; // Clear previous list items
-    
-    if (selectedDay === "Today") {
+    // Disable the fieldsets initially
+    departureFieldset.disabled = true;
+    arrivalFieldset.disabled = true;
 
-// Saturday hotfix start
-const today = new Date();
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const dayOfWeek = weekdays[today.getDay()];
-    
-const galwaySchedule = ClaregalwayGalwaySchedule(dayOfWeek);
-const claregalwaySchedule = GalwayClaregalwaySchedule(dayOfWeek);
-  
-const galwayList = document.getElementById("claregalwayToGalway");
-const claregalwayList = document.getElementById("galwayToClaregalway");
-// Saturday hotfix end
-
-      const filteredGalwaySchedule = filterSchedule(galwaySchedule);
-      const filteredClaregalwaySchedule = filterSchedule(claregalwaySchedule);
-  
-      filteredGalwaySchedule.forEach(entry => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `<b>${entry.time}</b>`;
-        galwayList.appendChild(listItem);
-      });
-  
-      filteredClaregalwaySchedule.forEach(entry => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `<b>${entry.time}</b>`;
-        claregalwayList.appendChild(listItem);
-      });
+    // Determine the range based on the selected route
+    let range, defaultDeparture;
+    if (routeValue === '427-Galway->Tuam') {
+        range = '427-Galway->Tuam!B1:J1';
+        defaultDeparture = 'Galway City';
+        defaultArrival = 'Tuam';
+    } else if (routeValue === '427-Tuam->Galway') {
+        range = '427-Tuam->Galway!B1:K1';
+        defaultDeparture = 'Tuam';
+        defaultArrival = 'Galway City';
+    } else if (routeValue === '435') {
+        console.log('No schedule for 435 yet');
     } else {
-      galwaySchedule.forEach(entry => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `<b>${entry.time}</b>`;
-        galwayList.appendChild(listItem);
-      });
-  
-      claregalwaySchedule.forEach(entry => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `<b>${entry.time}</b>`;
-        claregalwayList.appendChild(listItem);
-      });
+        console.log('Invalid route selected');
+    }
+
+    // Form the URL for fetching data
+    let url = null;
+    if (range) {
+        url = formUrl(sheetId, apiKey, range);
+    }
+
+    // Function to fetch and display schedule options
+    function showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture, defaultArrival) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                let stops = data.values[0];
+
+                // Populate the departure fieldset
+                stops.forEach(stop => {
+                    const labelElement = document.createElement('label');
+                    if (stop === defaultDeparture) {
+                        labelElement.classList.add('checked');
+                    }
+                    labelElement.innerHTML = `
+                        <input type="radio" name="departure" value="${stop}" ${stop === defaultDeparture ? 'checked' : ''}>
+                        ${stop}
+                    `;
+                    departureFieldset.appendChild(labelElement);
+                    departureFieldset.appendChild(document.createElement('br'));
+                });
+
+                // Add event listener to departure radio buttons
+                departureFieldset.addEventListener('change', function() {
+                    // Clear existing radio buttons in arrival fieldset
+                    arrivalFieldset.innerHTML = '<legend>Arrival:</legend>';
+
+                    // Get the selected departure stop
+                    const selectedDeparture = document.querySelector('input[name="departure"]:checked').value;
+                    const selectedDepartureIndex = stops.indexOf(selectedDeparture);
+
+                    // Populate the arrival fieldset with stops after the selected departure
+                    for (let i = selectedDepartureIndex + 1; i < stops.length; i++) {
+                        const labelElement = document.createElement('label');
+                        if (stops[i] === defaultArrival) {
+                            labelElement.classList.add('checked');
+                        }
+                        labelElement.innerHTML = `
+                            <input type="radio" name="arrival" value="${stops[i]}" ${stops[i] === defaultArrival ? 'checked' : ''}>
+                            ${stops[i]}
+                        `;
+                        arrivalFieldset.appendChild(labelElement);
+                        arrivalFieldset.appendChild(document.createElement('br'));
+                    }
+
+                    // Enable the arrival fieldset
+                    arrivalFieldset.disabled = false;
+
+                    // Add checked class to departure radio buttons
+                    document.querySelectorAll('input[name="departure"]').forEach(radio => {
+                        radio.addEventListener('change', function() {
+                            document.querySelectorAll('input[name="departure"]').forEach(radio => {
+                                const label = radio.parentNode;
+                                if (radio.checked) {
+                                    label.classList.add('checked');
+                                } else {
+                                    label.classList.remove('checked');
+                                }
+                            });
+                        });
+                        // Add checked class to arrival radio buttons
+                        document.querySelectorAll('input[name="arrival"]').forEach(radio => {
+                            radio.addEventListener('change', function() {
+                                document.querySelectorAll('input[name="arrival"]').forEach(radio => {
+                                    const label = radio.parentNode;
+                                    if (radio.checked) {
+                                        label.classList.add('checked');
+                                    } else {
+                                        label.classList.remove('checked');
+                                    }
+                                });
+                            });
+                        });
+                    });
+                });
+
+                // Enable the departure fieldset
+                departureFieldset.disabled = false;
+
+                // Trigger the change event for the departure fieldset to populate the arrival fieldset
+                const event = new Event('change');
+                departureFieldset.dispatchEvent(event);
+            })
+            .catch(error => console.error('Error fetching data: ', error))
+            .finally(() => {
+                // Hide the loading overlay
+                hideLoadingOverlay();
+            });
+    }
+
+    // Populate the radio buttons with the fetched data
+    if (url && routeValue !== '435') {
+        showSchedule(url, departureFieldset, arrivalFieldset, defaultDeparture, defaultArrival);
     }
 }
 
-const today = new Date();
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const dayOfWeek = weekdays[today.getDay()];
+// Function to apply the checked class to the selected label
+function applyCheckedClass() {
+    const routeRadios = document.querySelectorAll('input[name="route"]');
+    routeRadios.forEach(radio => {
+        const label = radio.parentNode;
+        if (radio.checked) {
+            label.classList.add('checked');
+        } else {
+            label.classList.remove('checked');
+        }
+    });
+}
 
-const dayOfWeekElement = document.getElementById("dayOfWeek");
-dayOfWeekElement.innerHTML = `Today is: <b>${dayOfWeek}</b>. Time is: <b>${getCurrentTime()}</b>`;
-
-const galwaySchedule = filterSchedule(ClaregalwayGalwaySchedule(dayOfWeek));
-const claregalwaySchedule = filterSchedule(GalwayClaregalwaySchedule(dayOfWeek));
-
-const galwayList = document.getElementById("claregalwayToGalway");
-const claregalwayList = document.getElementById("galwayToClaregalway");
-
-document.querySelectorAll('input[name="dayOfTheWeek"]').forEach((radio) => {
-    radio.addEventListener("change", updateSchedule);
+// Event listener for route radio buttons change
+document.querySelectorAll('input[name="route"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const routeValue = this.value;
+        populateOptions(routeValue);
+        applyCheckedClass();
+    });
 });
 
-updateSchedule();
+// Event listener for form submit
+document.getElementById('schedule-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    const formData = new FormData(this);
+    const selectedRoute = formData.get('route');
+    const selectedDeparture = formData.get('departure');
+    const selectedArrival = formData.get('arrival');
+
+    // Construct the new URL with query parameters
+    const newUrl = `/route.html?route=${encodeURIComponent(selectedRoute)}&departure=${encodeURIComponent(selectedDeparture)}&arrival=${encodeURIComponent(selectedArrival)}`;
+    
+    // Redirect to the new URL
+    window.location.href = newUrl;
+});
+
+// Initial population of options based on the default route
+const defaultRoute = document.querySelector('input[name="route"]:checked').value;
+populateOptions(defaultRoute);
+applyCheckedClass();

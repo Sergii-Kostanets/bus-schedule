@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burkesbus</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/site.webmanifest">
+</head>
+<body>
+    <a href="/">
+        <img src="/assets/img/banner.png" alt="Burkesbus Logo" class="logo">
+    </a>
+
+    <div id="loading-overlay" class="overlay">
+        <p>LOADING...</p>
+        <br>
+        <img src="/assets/img/loading.gif" alt="Loading animation">
+    </div>
+
+    <table id="scheduleTable" class="table-container">
+        <thead>
+            <tr>
+                <th>
+                    <span>Departure</span>
+                    <br>
+                    <span id="departureHeader"></span>
+                </th>
+                <th>
+                    <span>Arrival</span>
+                    <br>
+                    <span id="arrivalHeader"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Schedule data will be inserted here -->
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <div class="filter">
+            <label>
+                <input type="radio" name="dayFilter" value="TODAY" checked>
+                TODAY
+            </label>
+            <!-- <label>
+                <input type="radio" name="dayFilter" value="ALL">
+                ALL
+            </label> -->
+            <label>
+                <input type="radio" name="dayFilter" value="MO-FR">
+                MO-FR
+            </label>
+            <label>
+                <input type="radio" name="dayFilter" value="SAT">
+                SAT
+            </label>
+            <label>
+                <input type="radio" name="dayFilter" value="SUN">
+                SUN
+            </label>
+        </div>
+        <p>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Buy the ticket here</a>
+        </p>
+        <p>
+            <a href="/galway-claregalway.html" class="old-version">Old Version</a>
+        </p>
+        <p style="height: 10px;"></p>
+    </div>
+
+    <script src="/assets/js/route.js"></script>
+</body>
+</html>

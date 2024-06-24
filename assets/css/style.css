@@ -6,12 +6,15 @@
     box-sizing: border-box;
 }
 body {
-    background-image: url(/assets/img/burkesbus.jpg);
+    /* background-image: url(/assets/img/burkesbus.jpg); */
+    background-color: #1b1b1b;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     height: 100dvh;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .overlay {
     position: absolute;
@@ -19,90 +22,199 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for darkness */
-    z-index: -1; /* Ensure the overlay is above the background image */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
 }
 .logo {
-    width: 100%;
+    width: 80%;
     max-width: 400px;
+    border-radius: 10px;
+    margin-top: 5px;
 }
-#dayOfWeek {
-    margin: 5px 0px 0px;
+.logo:hover,
+.logo:active,
+.logo:focus,
+.logo:visited,
+.logo:focus-within
+.logo:focus-visible {
+    cursor: pointer;
+    opacity: 0.8;
+    outline: none;
 }
-h1 {
-    font-size: 22px;
-    margin: 5px 0px;
-    text-transform: uppercase;
-    color: aliceblue;
+
+fieldset > legend,
+fieldset > label {
+    line-height: 36px;
 }
-h2 {
-    font-size: 16px;
-    margin: 5px 5px;
-    color: aliceblue;
+fieldset > label {
+    line-height: 36px;
+    background-color: #464646;
+    color: #aaaaaa;
+    padding: 6px 8px;
+    border-radius: 5px;
 }
-p,
-label,
-select,
-option,
-fieldset {
-    font-size: 12px;
-    color: aliceblue;
+#departure-fieldset,
+#arrival-fieldset {
+    width: 150px;
 }
-li {
-    font-size: 14px;
-    color: aliceblue;
-}
-#schedule {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    max-width: 400px;
-    margin: 0 auto;
-}
-fieldset {
-    border: none;
-    color: aliceblue;
-    position: fixed;
-    bottom: 22px;
-    left: 0;
-    width: 100%;
-}
-fieldset > legend {
-    color: aliceblue;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-fieldset > div {
-    display: flex;
-    justify-content: space-around;
-    margin: 3px auto;
-    padding: 6px 10px;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
-    max-width: 300px;
-}
-fieldset > div > div {
-    display: flex;
-    flex-direction: column;
-    margin: 0 1px;
-}
-fieldset > div > div > input {
+fieldset > label > input {
     display: none;
 }
-fieldset > div > div > label {
-    cursor: pointer;
-    padding: 5px;
+
+#schedule-form > label {
+    display: block;
+}
+
+#schedule-form > select {
+    height: 30px;
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.274);
-    color: #000;
+}
+
+#schedule-form,
+#schedule-form > label {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+#departureHeader,
+#arrivalHeader {
+    color: rgb(194, 194, 194);
+}
+
+.checked {
+    color: #555;
+    background-color: #dbdbdb;
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+
+fieldset > label:hover {
+    color: #555;
+    background-color: #a7a7a7;
+    padding: 6px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#combined-schedule {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#combined-schedule > div {
+    display: flex;
+    justify-content: center;
+}
+#combined-schedule > div > div {
+    width: 100px;
+}
+
+#schedule-form fieldset {
+    border: none;
+    color: white;
+}
+.departure-arrival {
+    display: flex;
+    justify-content: center;
+}
+
+#departure-fieldset {
+    border: none;
+    color: beige;
+    margin: 0 10px 20px;
+}
+
+#arrival-fieldset {
+    border: none;
+    color: bisque;
+    margin: 0 10px 20px;
+}
+
+button[type="submit"] {
+    border-radius: 6px;
+    color: black;
+    background-color: rgb(235, 44, 44);
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 6px;
+    font-size: 18px;
+}
+
+a.buy-ticket {
+    color: rgb(139, 201, 255);
+    text-decoration: none;
+    line-height: 28px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    padding: 5px 8px;
+}
+
+a.old-version {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    line-height: 28px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 5px 8px;
+}
+
+.table-container {
+    color: aliceblue;
+    margin: 0 auto 25px;
+}
+
+table#scheduleTable th {
+    width: 120px;
+}
+
+table#scheduleTable thead {
+    height: 50px;
+}
+
+.footer {
+    margin-top: auto;
+    text-transform: uppercase;
     font-weight: bold;
 }
-fieldset > div > div > label.checked {
-    background-color: rgba(199, 199, 199, 0.5);
+
+.footer p {
+    margin-bottom: 15px;
 }
-@media screen and (max-height: 600px) {
-    #schedule > div > rgb(0, 0, 0) {
-        font-size: 10px;
-    }
+
+.filter {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.filter label {
+    margin: 0 4px;
+    background-color: rgb(116, 116, 116);
+    border-radius: 5px;
+    padding: 4px 5px 4px 6px;
+}
+
+.filter input {
+    display: none;
+}
+
+#loading-overlay {
+    display: none;
+}
+#loading-overlay>img {
+    width: 50px;
+    height: 50px;
+}
+.overlay {
+    position: fixed; /* Changed from absolute to fixed to cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it is on top of other elements */
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
 }

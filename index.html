@@ -11,44 +11,52 @@
     <link rel="manifest" href="/assets/img/site.webmanifest">
 </head>
 <body>
-    <div class="overlay"></div>
-    <!-- <h1>Burkesbus</h1> -->
     <a href="/">
-        <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
+        <img src="/assets/img/banner.png" alt="Burkesbus Logo" class="logo">
     </a>
-    <p id="dayOfWeek"></p>
 
-    <fieldset>
-        <div>
-            <div>
-                <input type="radio" id="Today" name="dayOfTheWeek" value="Today" checked />
-                <label for="Today" class="checked">Today</label>
-            </div>
-            <div>
-                <input type="radio" id="Workday" name="dayOfTheWeek" value="Workday" />
-                <label for="Workday">MO-FR</label>
-            </div>
-            <div>
-                <input type="radio" id="Saturday" name="dayOfTheWeek" value="Saturday" />
-                <label for="Saturday">SA</label>
-            </div>
-            <div>
-                <input type="radio" id="Sunday" name="dayOfTheWeek" value="Sunday" />
-                <label for="Sunday">SU</label>
-            </div>
-        </div>
-        <p>P.S: Ongoing development</p>
-    </fieldset>
+    <div id="loading-overlay" class="overlay">
+        <p>LOADING...</p>
+        <br>
+        <img src="/assets/img/loading.gif" alt="Loading animation">
+    </div>
 
-    <div id="schedule">
-        <div>
-            <h2>Claregalway &rArr;&nbsp;Galway</h2>
-            <ul id="claregalwayToGalway"></ul>
+    <form id="schedule-form">
+        <!-- Replace route dropdown with radio buttons -->
+        <fieldset>
+            <legend>Choose Route:</legend>
+            <label>
+                <input type="radio" name="route" value="427-Galway->Tuam" checked>
+                427 Galway - Tuam/Dunmore
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="route" value="427-Tuam->Galway">
+                427 Tuam/Dunmore - Galway
+            </label>
+        </fieldset>
+        <div class="departure-arrival">
+            <fieldset id="departure-fieldset">
+                <legend>Departure:</legend>
+                <!-- Radio buttons for departure will be dynamically populated -->
+            </fieldset>
+            <fieldset id="arrival-fieldset" disabled>
+                <legend>Arrival:</legend>
+                <!-- Radio buttons for arrival will be dynamically populated -->
+            </fieldset>
         </div>
-        <div>
-            <h2>Galway&nbsp;&rArr; Claregalway</h2>    
-            <ul id="galwayToClaregalway"></ul>
-        </div>
+        <button type="submit">Schedule</button>
+        <br>
+    </form>
+
+    <div class="footer">
+        <p>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Buy the ticket here</a>
+        </p>
+        <p>
+            <a href="/galway-claregalway.html" class="old-version">Old Version</a>
+        </p>
+        <p style="height: 10px;"></p>
     </div>
 
     <script src="/assets/js/script.js"></script>
