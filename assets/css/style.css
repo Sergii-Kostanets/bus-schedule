@@ -6,7 +6,6 @@
     box-sizing: border-box;
 }
 body {
-    /* background-image: url(/assets/img/burkesbus.jpg); */
     background-color: #1b1b1b;
     background-size: cover;
     background-repeat: no-repeat;
@@ -90,7 +89,6 @@ fieldset > label > input {
 
 fieldset > label:hover {
     color: #555;
-    background-color: #a7a7a7;
     padding: 6px 8px;
     border-radius: 5px;
     cursor: pointer;
@@ -137,6 +135,13 @@ button[type="submit"] {
     font-weight: bold;
     padding: 6px;
     font-size: 18px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    color: rgb(42, 42, 42);
 }
 
 a.buy-ticket {
@@ -204,13 +209,13 @@ table#scheduleTable thead {
     height: 50px;
 }
 .overlay {
-    position: fixed; /* Changed from absolute to fixed to cover the whole screen */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background */
-    z-index: 1000; /* Ensure it is on top of other elements */
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1000;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
