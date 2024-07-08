@@ -9,11 +9,13 @@ function formUrl(sheetId, apiKey, range) {
 // Function to show the loading overlay
 function showLoadingOverlay() {
     document.getElementById('loading-overlay').style.display = 'flex';
+    // document.getElementById('switch-direction-button').style.display = 'none';
 }
 
 // Function to hide the loading overlay
 function hideLoadingOverlay() {
     document.getElementById('loading-overlay').style.display = 'none';
+    // document.getElementById('switch-direction-button').style.display = 'block';
 }
 
 // Function to get query parameters from the URL
