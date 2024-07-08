@@ -9,11 +9,13 @@ function formUrl(sheetId, apiKey, range) {
 // Function to show the loading overlay
 function showLoadingOverlay() {
     document.getElementById('loading-overlay').style.display = 'flex';
+    // document.getElementById('switch-direction-button').style.display = 'none';
 }
 
 // Function to hide the loading overlay
 function hideLoadingOverlay() {
     document.getElementById('loading-overlay').style.display = 'none';
+    // document.getElementById('switch-direction-button').style.display = 'block';
 }
 
 // Function to get query parameters from the URL
@@ -60,9 +62,10 @@ function fetchSchedule(route, departure, arrival) {
                     arrivalTime: row[arrivalIndex]
                 }))
         })
-        .catch(error => {console.error('Error fetching data: ', error);
-            return [];}
-        )
+        .catch(error => {
+            console.error('Error fetching data: ', error);
+            return [];
+        })
         .finally(() => {
             // Hide the loading overlay
             hideLoadingOverlay();
@@ -85,21 +88,43 @@ function filterSchedule(data, filter) {
     });
 }
 
-function displaySchedule(data) {
+function displaySchedule(data, filter) {
     const tableBody = document.getElementById('scheduleTable').querySelector('tbody');
     tableBody.innerHTML = ''; // Clear existing rows
 
+    const currentTime = new Date(); // Get the current date and time
+    const currentYear = currentTime.getFullYear();
+    const currentMonth = currentTime.getMonth();
+    const currentDate = currentTime.getDate();
+
     data.forEach(row => {
         const tr = document.createElement('tr');
-        // const dayTd = document.createElement('td');
         const departureTd = document.createElement('td');
         const arrivalTd = document.createElement('td');
 
-        // dayTd.textContent = row.day;
         departureTd.textContent = row.departureTime;
         arrivalTd.textContent = row.arrivalTime;
 
-        // tr.appendChild(dayTd);
+        if (filter === 'TODAY') {
+            // Create a Date object for the departure time with today's date
+            const [departureHour, departureMinute] = row.departureTime.split(':').map(Number);
+            const departureTime = new Date(currentYear, currentMonth, currentDate, departureHour, departureMinute);
+
+            // Create a Date object for the arrival time with today's date
+            const [arrivalHour, arrivalMinute] = row.arrivalTime.split(':').map(Number);
+            const arrivalTime = new Date(currentYear, currentMonth, currentDate, arrivalHour, arrivalMinute);
+
+            // Check if departure time is in the past relative to current time
+            if (departureTime < currentTime) {
+                departureTd.classList.add('past-time'); // Add custom CSS class for past time
+            }
+
+            // Check if arrival time is in the past relative to current time
+            if (arrivalTime < currentTime) {
+                arrivalTd.classList.add('past-time'); // Add custom CSS class for past time
+            }
+        }
+
         tr.appendChild(departureTd);
         tr.appendChild(arrivalTd);
         tableBody.appendChild(tr);
@@ -121,15 +146,16 @@ fetchSchedule(route, departure, arrival).then(data => {
     // Initial display of schedule
     const initialFilter = 'TODAY';
     const filteredData = filterSchedule(data, initialFilter);
-    displaySchedule(filteredData);
+    displaySchedule(filteredData, initialFilter);
     updateCheckedClass(initialFilter);
 
     // Add event listeners to radio buttons
     document.querySelectorAll('input[name="dayFilter"]').forEach(radio => {
         radio.addEventListener('change', (event) => {
-            const filteredData = filterSchedule(data, event.target.value);
-            displaySchedule(filteredData);
-            updateCheckedClass(event.target.value);
+            const selectedFilter = event.target.value;
+            const filteredData = filterSchedule(data, selectedFilter);
+            displaySchedule(filteredData, selectedFilter);
+            updateCheckedClass(selectedFilter);
         });
     });
 });
