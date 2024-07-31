@@ -153,23 +153,16 @@ a.buy-ticket {
     padding: 5px 8px;
 }
 
-a.old-version {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    line-height: 28px;
-    background-color: rgb(0, 0, 0);
-    border-radius: 5px;
-    padding: 5px 8px;
-}
-
 a.quick-pick {
     color: rgb(228, 228, 228);
     text-decoration: none;
-    line-height: 28px;
+    line-height: 20px;
     background-color: rgb(0, 67, 105);
     border-radius: 5px;
     padding: 5px 8px;
     text-transform: none;
+    margin: 0 5px;
+    display: inline-block;
 }
 
 .table-container {
@@ -193,6 +186,11 @@ table#scheduleTable thead {
 
 .footer p {
     margin-bottom: 15px;
+}
+
+.footer-routes {
+    display: flex;
+    justify-content: center;
 }
 
 .filter {
@@ -235,4 +233,10 @@ table#scheduleTable thead {
 }
 .past-time{
     color: #ffffff39;
+}
+
+@media screen and (max-width: 320px) {
+    .footer-routes {
+        flex-direction: column;
+    }
 }
