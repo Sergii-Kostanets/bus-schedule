@@ -193,6 +193,12 @@ table#scheduleTable thead {
     justify-content: center;
 }
 
+.footer-info {
+    color: aliceblue;
+    text-transform: none;
+    font-weight: normal;
+}
+
 .filter {
     margin-bottom: 20px;
     color: white;
