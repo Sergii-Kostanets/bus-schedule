@@ -9,15 +9,11 @@ function formUrl(sheetId, apiKey, range) {
 // Function to show the loading overlay
 function showLoadingOverlay() {
     document.getElementById('loading-overlay').style.display = 'flex';
-    document.getElementById('schedule-form').style.display = 'none';
-    document.getElementById('footer-info').style.display = 'none';
 }
 
 // Function to hide the loading overlay
 function hideLoadingOverlay() {
     document.getElementById('loading-overlay').style.display = 'none';
-    document.getElementById('schedule-form').style.display = 'block';
-    document.getElementById('footer-info').style.display = 'block';
 }
 
 // Function to populate the radio buttons based on the selected route
