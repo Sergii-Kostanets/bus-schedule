@@ -5,6 +5,7 @@
     text-align: center;
     box-sizing: border-box;
 }
+
 body {
     background-color: #1b1b1b;
     background-size: cover;
@@ -15,21 +16,39 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
 }
+
+#loading-overlay {
+    display: none;
+}
+
+#loading-overlay>img {
+    width: 50px;
+    height: 50px;
+}
+
 .logo {
     width: 80%;
     max-width: 400px;
     border-radius: 10px;
     margin-top: 5px;
 }
+
 .logo:hover,
 .logo:active,
 .logo:focus,
@@ -217,29 +236,6 @@ table#scheduleTable thead {
     display: none;
 }
 
-#loading-overlay {
-    display: none;
-}
-#loading-overlay>img {
-    width: 50px;
-    height: 50px;
-}
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 2.5rem;
-    background-color: rgba(0, 0, 0, 0.7);
-}
 .past-time{
     color: #ffffff39;
 }
