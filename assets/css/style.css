@@ -64,17 +64,21 @@ fieldset > legend,
 fieldset > label {
     line-height: 36px;
 }
+
 fieldset > label {
     line-height: 36px;
     background-color: #464646;
     color: #aaaaaa;
     padding: 6px 8px;
     border-radius: 5px;
+    margin: 0 5px;
 }
+
 #departure-fieldset,
 #arrival-fieldset {
     width: 150px;
 }
+
 fieldset > label > input {
     display: none;
 }
@@ -238,6 +242,16 @@ table#scheduleTable thead {
 
 .past-time{
     color: #ffffff39;
+}
+
+.br-display {
+    display: none;
+}
+
+@media screen and (max-width: 380px) {
+    .br-display {
+        display: block;
+    }
 }
 
 @media screen and (max-width: 320px) {

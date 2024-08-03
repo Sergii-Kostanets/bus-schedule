@@ -42,8 +42,14 @@ function populateOptions(routeValue) {
         range = '427-Tuam->Galway!B1:K1';
         defaultDeparture = 'Tuam';
         defaultArrival = 'Galway City';
-    } else if (routeValue === '435') {
-        console.log('No schedule for 435 yet');
+    } else if (routeValue === '435-Galway->Headford') {
+        range = '435-Galway->Headford!B1:I1';
+        defaultDeparture = 'Galway City';
+        defaultArrival = 'Headford';
+    } else if (routeValue === '435-Headford->Galway') {
+        range = '435-Headford->Galway!B1:J1';
+        defaultDeparture = 'Headford';
+        defaultArrival = 'Galway City';
     } else {
         console.log('Invalid route selected');
     }
