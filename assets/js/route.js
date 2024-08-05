@@ -87,7 +87,7 @@ function filterSchedule(data, filter) {
     const holiday = isHoliday(todayDate);
     
     if (holiday) {
-        document.getElementById('footer-info').innerText = 'Today is a Bank Holiday';
+        document.getElementById('footer-info').innerText = 'Today is a bank holiday!';
     }
 
     return data.filter(row => {
