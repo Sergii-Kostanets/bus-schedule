@@ -1,6 +1,15 @@
 const sheetId = "1774H66Bt1Gl9MT_YLxuFpbDZtzcPe4XQgjB1p9Eiovo";
 const apiKey = "AIzaSyD8XLZMEgRsPCeKzo5aZ0eSrN7XolPrJhQ";
 
+const holidays = [
+    "05/08/2024",
+];
+
+function isHoliday(date) {
+    const formattedDate = date.toLocaleDateString('en-GB'); // Format as dd/mm/yyyy
+    return holidays.includes(formattedDate);
+}
+
 // Function to construct the URL for the Google Sheets API
 function formUrl(sheetId, apiKey, range) {
     return `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
@@ -73,10 +82,17 @@ function fetchSchedule(route, departure, arrival) {
 }
 
 function filterSchedule(data, filter) {
-    const today = new Date().toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
+    const todayDate = new Date();
+    const today = todayDate.toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
+    const holiday = isHoliday(todayDate);
+    
+    if (holiday) {
+        document.getElementById('footer-info').innerText = 'Today is a Bank Holiday';
+    }
 
     return data.filter(row => {
         if (filter === 'TODAY') {
+            if (holiday) return row.day.includes('Su') || row.day.includes('Sun');
             if (today === 'SAT') return row.day.includes('Sa') || row.day.includes('M-Su');
             if (today === 'SUN') return row.day.includes('Su') || row.day.includes('Sun');
             if (today != 'SAT' && today != 'SUN') return row.day.includes('M');
