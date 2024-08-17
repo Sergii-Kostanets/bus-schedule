@@ -214,6 +214,7 @@ table#scheduleTable thead {
 .footer-routes {
     display: flex;
     justify-content: center;
+    margin: 0 15px;
 }
 
 .footer-info {
