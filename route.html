@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burkesbus</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/site.webmanifest">
+</head>
+<body>
+    <a href="/">
+        <img src="/assets/img/banner.png" alt="Burkesbus Logo" class="logo">
+    </a>
+
+    <div id="loading-overlay" class="overlay">
+        <p>LOADING...</p>
+        <br>
+        <img src="/assets/img/loading.gif" alt="Loading animation">
+    </div>
+
+    <div>
+        <br>
+        <p style="color: white; font-size: 10px;">
+            Please be aware that this is a personal project unrelated to Burkesbus company.
+            <br>
+            To check the official route schedule, please visit the official <a style="color: rgb(251, 75, 75);" href="https://burkesbus.ie/" target="_blank" rel="noopener noreferrer">burkesbus.ie</a> website.
+        </p>
+    </div>
+
+    <button id="switch-direction-button" style="width: 40px; height: 40px; border-radius: 50%; border: none; margin: 0 auto; cursor: pointer; position: relative; top: 40%; margin-bottom: -40px; display: none;">
+        <img style="width: 40px; height: 40px; border-radius: 50%;" src="/assets/img/switch.gif" alt="Change direction animated icon">
+    </button>
+
+    <table id="scheduleTable" class="table-container">
+        <thead>
+            <tr>
+                <th>
+                    <span>Departure</span>
+                    <br>
+                    <span id="departureHeader"></span>
+                </th>
+                <th>
+                    <span>Arrival</span>
+                    <br>
+                    <span id="arrivalHeader"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Schedule data will be inserted here -->
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p class="footer-info" id="footer-info">
+        </p>
+        <div class="filter">
+            <label>
+                <input type="radio" name="dayFilter" value="TODAY" checked>
+                TODAY
+            </label>
+            <!-- <label>
+                <input type="radio" name="dayFilter" value="ALL">
+                ALL
+            </label> -->
+            <label>
+                <input type="radio" name="dayFilter" value="MO-FR">
+                MO-FR
+            </label>
+            <label>
+                <input type="radio" name="dayFilter" value="SAT">
+                SAT
+            </label>
+            <label>
+                <input type="radio" name="dayFilter" value="SUN">
+                SUN
+            </label>
+        </div>
+        <p>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Buy the ticket here</a>
+        </p>
+        <p style="height: 10px;"></p>
+    </div>
+
+    <script src="/assets/js/route.js"></script>
+</body>
+</html>

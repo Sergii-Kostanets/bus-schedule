@@ -11,48 +11,82 @@
     <link rel="manifest" href="/assets/img/site.webmanifest">
 </head>
 <body>
-    <div class="overlay"></div>
-    <!-- <h1>Burkesbus</h1> -->
     <a href="/">
-        <img src="/assets/img/logo.png" alt="Burkesbus Logo" class="logo">
+        <img src="/assets/img/banner.png" alt="Burkesbus Logo" class="logo">
     </a>
-    <p id="dayOfWeek"></p>
 
-    <fieldset>
-        <div>
-            <div>
-                <input type="radio" id="Today" name="dayOfTheWeek" value="Today" checked />
-                <label for="Today" class="checked">Today</label>
-            </div>
-            <div>
-                <input type="radio" id="Workday" name="dayOfTheWeek" value="Workday" />
-                <label for="Workday">MO-FR</label>
-            </div>
-            <div>
-                <input type="radio" id="Saturday" name="dayOfTheWeek" value="Saturday" />
-                <label for="Saturday">SA</label>
-            </div>
-            <div>
-                <input type="radio" id="Sunday" name="dayOfTheWeek" value="Sunday" />
-                <label for="Sunday">SU</label>
-            </div>
-        </div>
-        <p>P.S: Ongoing development</p>
-    </fieldset>
-
-    <div id="schedule">
-        <div>
-            <h2>Claregalway &rArr;&nbsp;Galway</h2>
-            <ul id="claregalwayToGalway"></ul>
-        </div>
-        <div>
-            <h2>Galway&nbsp;&rArr; Claregalway</h2>    
-            <ul id="galwayToClaregalway"></ul>
-        </div>
+    <div id="loading-overlay" class="overlay">
+        <p>LOADING...</p>
+        <br>
+        <img src="/assets/img/loading.gif" alt="Loading animation">
     </div>
 
-    <script src="/assets/js/env.js"></script>
-    <!-- <script src="/assets/js/env.prod.js"></script> -->
+    <div>
+        <br>
+        <p style="color: white; font-size: 10px;">
+            Please be aware that this is a personal project unrelated to Burkesbus company.
+            <br>
+            To check the official route schedule, please visit the official <a style="color: rgb(251, 75, 75);" href="https://burkesbus.ie/" target="_blank" rel="noopener noreferrer">burkesbus.ie</a> website.
+        </p>
+    </div>
+
+    <form id="schedule-form">
+        <fieldset>
+            <legend>Choose Route:</legend>
+            <label>
+                <input type="radio" name="route" value="427-Galway->Tuam" checked>
+                427 Galway &rArr; Tuam
+            </label>
+            <br class="br-display">
+            <label>
+                <input type="radio" name="route" value="427-Tuam->Galway">
+                427 Tuam &rArr; Galway
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="route" value="435-Galway->Headford">
+                435 Galway &rArr; Headford
+            </label>
+            <br class="br-display">
+            <label>
+                <input type="radio" name="route" value="435-Headford->Galway">
+                435 Headford &rArr; Galway
+            </label>
+        </fieldset>
+        <div class="departure-arrival">
+            <fieldset id="departure-fieldset">
+                <legend>Departure:</legend>
+                <!-- Radio buttons for departure will be dynamically populated -->
+            </fieldset>
+            <fieldset id="arrival-fieldset" disabled>
+                <legend>Arrival:</legend>
+                <!-- Radio buttons for arrival will be dynamically populated -->
+            </fieldset>
+        </div>
+        <button type="submit">Schedule</button>
+        <br>
+    </form>
+
+    <div class="footer">
+        <p class="footer-info" id="footer-info">
+        </p>
+        <div class="footer-routes">
+            <p>
+                <a href="/route.html?route=427-Galway->Tuam&departure=Galway%20City&arrival=Claregalway" class="quick-pick">Galway&nbsp;&rArr; Claregalway</a>
+            </p>
+            <p>
+                <a href="/route.html?route=427-Tuam->Galway&departure=Claregalway&arrival=Galway%20City" class="quick-pick">Claregalway &rArr;&nbsp;Galway</a>
+            </p>
+        </div>
+        <p>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Buy the ticket here</a>
+        </p>
+        <p style="height: 10px;"></p>
+    </div>
+
     <script src="/assets/js/script.js"></script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8f9a02763ebf45aaaf4bb6de4481a1a0"}'></script>
+    <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
