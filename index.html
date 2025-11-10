@@ -12,7 +12,7 @@
 </head>
 <body>
     <a href="/">
-        <img src="/assets/img/banner.png" alt="Burkesbus Logo" class="logo">
+        <img src="/assets/img/bus.png" alt="Bus Logo" class="logo logo-bus">
     </a>
 
     <div id="loading-overlay" class="overlay">
@@ -26,7 +26,9 @@
         <p style="color: white; font-size: 10px;">
             Please be aware that this is a personal project unrelated to Burkesbus company.
             <br>
-            To check the official route schedule, please visit the official <a style="color: rgb(251, 75, 75);" href="https://burkesbus.ie/" target="_blank" rel="noopener noreferrer">burkesbus.ie</a> website.
+            To check the official route schedule, please visit the official <a style="color: rgb(251, 75, 75);" href="https://burkesbus.ie/" target="_blank" rel="noopener noreferrer">burkesbus.ie</a> website,
+            <br>
+            and <a style="color: rgb(251, 75, 75);" href="https://www.buseireann.ie/" target="_blank" rel="noopener noreferrer">buseireann.ie</a> website.
         </p>
     </div>
 
@@ -52,6 +54,16 @@
                 <input type="radio" name="route" value="435-Headford->Galway">
                 435 Headford &rArr; Galway
             </label>
+            <br>
+            <label>
+                <input type="radio" name="route" value="419-Galway->Moycullen">
+                419 Galway &rArr; Moycullen
+            </label>
+            <br class="br-display">
+            <label>
+                <input type="radio" name="route" value="419-Moycullen->Galway">
+                419 Moycullen &rArr; Galway
+            </label>
         </fieldset>
         <div class="departure-arrival">
             <fieldset id="departure-fieldset">
@@ -72,6 +84,14 @@
         </p>
         <div class="footer-routes">
             <p>
+                <a href="/route.html?route=419-Galway->Moycullen&departure=Galway%20City&arrival=Clydagh%20Bridge" class="quick-pick">Galway&nbsp;&rArr; Clydagh Bridge</a>
+            </p>
+            <p>
+                <a href="/route.html?route=419-Moycullen->Galway&departure=Clydagh%20Bridge&arrival=Galway%20City" class="quick-pick">Clydagh Bridge &rArr;&nbsp;Galway</a>
+            </p>
+        </div>
+        <div class="footer-routes">
+            <p>
                 <a href="/route.html?route=427-Galway->Tuam&departure=Galway%20City&arrival=Claregalway" class="quick-pick">Galway&nbsp;&rArr; Claregalway</a>
             </p>
             <p>
@@ -79,7 +99,7 @@
             </p>
         </div>
         <p>
-            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Buy the ticket here</a>
+            <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Burkesbus ticket</a>
         </p>
         <p style="height: 10px;"></p>
     </div>

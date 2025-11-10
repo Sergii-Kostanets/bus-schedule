@@ -49,6 +49,10 @@ body {
     margin-top: 5px;
 }
 
+.logo-bus {
+    width: 100px;
+}
+
 .logo:hover,
 .logo:active,
 .logo:focus,
@@ -168,12 +172,13 @@ button[type="submit"]:hover {
 }
 
 a.buy-ticket {
-    color: rgb(139, 201, 255);
+    color: rgb(120, 0, 0);
     text-decoration: none;
     line-height: 28px;
     background-color: aliceblue;
     border-radius: 5px;
     padding: 5px 8px;
+    letter-spacing: 1px;
 }
 
 a.quick-pick {
@@ -249,13 +254,10 @@ table#scheduleTable thead {
     display: none;
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 450px) {
     .br-display {
         display: block;
     }
-}
-
-@media screen and (max-width: 320px) {
     .footer-routes {
         flex-direction: column;
     }
