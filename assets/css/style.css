@@ -49,6 +49,10 @@ body {
     margin-top: 5px;
 }
 
+.logo-bus {
+    width: 100px;
+}
+
 .logo:hover,
 .logo:active,
 .logo:focus,
