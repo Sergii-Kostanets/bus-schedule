@@ -235,15 +235,15 @@ table#scheduleTable thead {
 .footer p.footer-route-number {
     font-size: 16px;
     color: #dddddd;
-    margin-bottom: 1px;
+    margin-bottom: 10px;
 }
 
 .footer p.footer-route-number a {
     color: #9a9a9a;
     text-decoration: none;
     text-transform: none;
-    padding: 1px 2px;
-    border-radius: 2px;
+    padding: 1px 6px 2px;
+    border-radius: 4px;
     background-color: #3e3e3e;
 }
 
