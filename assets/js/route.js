@@ -41,8 +41,36 @@ route = getQueryParams().route;
 departure = getQueryParams().departure;
 arrival = getQueryParams().arrival;
 
+function parseRoute(routeString) {
+    const [routeNum, locations] = routeString.split('-', 2);
+    const [from, to] = locations.split('->');
+    return {
+        number: routeNum,
+        locations: locations,
+        from: from,
+        to: to,
+    };
+}
+const parsedRoute = parseRoute(route);
+
+function getBrand(routeNumber) {
+    const map = {
+        '419': 'Buseireann',
+        '923': 'Citylink',
+        '427': 'Burkesbus',
+        // add more mappings here
+    };
+    return map[String(routeNumber).trim()] || '';
+}
+const dest = arrival || parsedRoute.to || '';
+const brand = getBrand(parsedRoute.number);
+const routeLabel = brand
+    ? `${brand} ${parsedRoute.number} from ${parsedRoute.from} to ${dest}`
+    : `${parsedRoute.number} from ${parsedRoute.from} to ${dest}`;
+
 document.getElementById('departureHeader').textContent = departure;
 document.getElementById('arrivalHeader').textContent = arrival;
+document.getElementById('routeNumber').textContent = routeLabel;
 
 // Update the fetchSchedule function to accept a custom range
 function fetchSchedule(route, departure, arrival) {
