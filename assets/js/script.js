@@ -69,10 +69,10 @@ function populateOptions(routeValue) {
     } else if (routeValue === '419-Galway->Moycullen') {
         range = '419-Galway->Moycullen!B1:D1';
         defaultDeparture = 'Galway City';
-        defaultArrival = 'Moycullen';
+        defaultArrival = 'Clydagh Bridge';
     } else if (routeValue === '419-Moycullen->Galway') {
         range = '419-Moycullen->Galway!B1:D1';
-        defaultDeparture = 'Moycullen';
+        defaultDeparture = 'Clydagh Bridge';
         defaultArrival = 'Galway City';
     } else if (routeValue === '923-Galway->Moycullen') {
         range = '923-Galway->Moycullen!B1:C1';
