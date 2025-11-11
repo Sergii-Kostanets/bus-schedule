@@ -277,6 +277,12 @@ table#scheduleTable thead {
     outline: none;
 }
 
+#routeNumber {
+    color: #fff;
+    margin: 10px 0 -4px;
+    font-size: 12px;
+}
+
 @media screen and (max-width: 450px) {
     .br-display {
         display: block;
