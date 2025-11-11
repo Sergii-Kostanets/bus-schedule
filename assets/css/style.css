@@ -42,28 +42,6 @@ body {
     height: 50px;
 }
 
-.logo {
-    width: 80%;
-    max-width: 400px;
-    border-radius: 10px;
-    margin-top: 5px;
-}
-
-.logo-bus {
-    width: 100px;
-}
-
-.logo:hover,
-.logo:active,
-.logo:focus,
-.logo:visited,
-.logo:focus-within
-.logo:focus-visible {
-    cursor: pointer;
-    opacity: 0.8;
-    outline: none;
-}
-
 fieldset > legend,
 fieldset > label {
     line-height: 36px;
@@ -252,6 +230,57 @@ table#scheduleTable thead {
 
 .br-display {
     display: none;
+}
+
+.footer p.footer-route-number {
+    font-size: 16px;
+    color: #dddddd;
+    margin-bottom: 1px;
+}
+
+.footer p.footer-route-number a {
+    color: #9a9a9a;
+    text-decoration: none;
+    text-transform: none;
+    padding: 1px 2px;
+    border-radius: 2px;
+    background-color: #3e3e3e;
+}
+
+.footer p.footer-route-number a:hover {
+    color: #c4c4c4;
+}
+
+.logo-home-button {
+    color: rgb(197, 0, 0);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px !important;
+    display: block;
+    padding: 5px 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: #ff0000 0px 0px 13px 2px;
+}
+
+.logo-home-button:hover,
+.logo-home-button:active,
+.logo-home-button:focus,
+.logo-home-button:visited,
+.logo-home-button:focus-within
+.logo-home-button:focus-visible {
+    cursor: pointer;
+    opacity: 0.8;
+    outline: none;
+}
+
+#routeNumber {
+    color: #fff;
+    margin: 10px 0 -4px;
+    font-size: 12px;
 }
 
 @media screen and (max-width: 450px) {

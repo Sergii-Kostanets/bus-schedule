@@ -11,8 +11,8 @@
     <link rel="manifest" href="/assets/img/site.webmanifest">
 </head>
 <body>
-    <a href="/">
-        <img src="/assets/img/bus.png" alt="Bus Logo" class="logo logo-bus">
+    <a href="/" class="logo-home-button">
+        Bus Schedules
     </a>
 
     <div id="loading-overlay" class="overlay">
@@ -36,6 +36,7 @@
         <img style="width: 40px; height: 40px; border-radius: 50%;" src="/assets/img/switch.gif" alt="Change direction animated icon">
     </button>
 
+    <p id="routeNumber"></p>
     <table id="scheduleTable" class="table-container">
         <thead>
             <tr>
@@ -81,6 +82,12 @@
                 SUN
             </label>
         </div>
+        <p>
+            <a href="https://www.buseireann.ie/" target="_blank" class="buy-ticket">Buseireann ticket</a>
+        </p>
+        <p>
+            <a href="https://www.citylink.ie/#portalBooking" target="_blank" class="buy-ticket">Citylink ticket</a>
+        </p>
         <p>
             <a href="https://bookings.burkesbus.ie/" target="_blank" class="buy-ticket">Burkesbus ticket</a>
         </p>
